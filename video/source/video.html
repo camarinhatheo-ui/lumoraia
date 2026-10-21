@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lumora — vídeo de apresentação</title>
+<style>
+  :root{
+    --bg:#070714; --violet:#7c5cff; --violet2:#a78bfa; --cyan:#22d3ee; --amber:#fbbf24;
+    --green:#34d399; --red:#fb7185; --orange:#fb923c; --ink:#f5f5ff; --mute:#9aa0c3;
+    --line:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:'Inter','Noto Color Emoji',sans-serif;color:var(--ink)}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--bg)}
+  .abs{position:absolute}
+  .scene{position:absolute;inset:0;opacity:0;will-change:transform,opacity}
+  .card{position:absolute;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1.5px solid var(--line);border-radius:40px;box-shadow:0 40px 120px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12)}
+  .blob{position:absolute;left:0;top:0;border-radius:50%;filter:blur(120px);opacity:.5}
+  .gt{background:linear-gradient(90deg,var(--violet2),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .star{display:inline-block;color:var(--amber)}
+  .bubble{position:absolute;left:36px;width:728px;height:112px;border-radius:26px;background:rgba(255,255,255,.07);border:1.5px solid var(--line);padding:18px 24px 0 112px}
+  .bubble .av{position:absolute;left:24px;top:20px;width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;color:#0b0b1a}
+  .bubble .st{font-size:24px;letter-spacing:3px;color:var(--amber)}
+  .bubble .tx{font-size:30px;font-weight:600;margin-top:2px;white-space:nowrap}
+  .bar{position:absolute;width:72px;bottom:0;border-radius:18px 18px 8px 8px}
+  .lbl{position:absolute;width:100px;text-align:center;font-size:26px;font-weight:700;color:var(--mute)}
+  .pin{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;border:3px solid rgba(255,255,255,.9)}
+  .chip{position:absolute;display:flex;align-items:center;gap:22px;height:104px;padding:0 40px 0 24px;border-radius:60px;font-size:44px;font-weight:800;background:rgba(14,14,34,.9);border:2px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .chip .ic{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px}
+  .row{position:absolute;left:0;width:1060px;height:70px;border-radius:20px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);font-size:27px;font-weight:600}
+  .row span{position:absolute;top:0;line-height:67px}
+  #sub{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-size:56px;font-weight:800;letter-spacing:-.5px;opacity:0}
+  #sub .pill{display:inline-block;padding:14px 44px 18px;border-radius:30px;background:rgba(7,7,20,.78);border:1.5px solid rgba(255,255,255,.14)}
+  #sub .w{color:rgba(255,255,255,.45)} #sub .w.on{color:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg" class="abs" style="inset:0">
+    <div class="blob" id="b1" style="width:900px;height:900px;background:var(--violet)"></div>
+    <div class="blob" id="b2" style="width:800px;height:800px;background:var(--cyan)"></div>
+    <div class="blob" id="b3" style="width:700px;height:700px;background:#ec4899;opacity:.25"></div>
+    <svg class="abs" style="inset:0" width="1920" height="1080" id="dots"></svg>
+    <div id="parts"></div>
+  </div>
+
+  <!-- CENA 1+2 -->
+  <div class="scene" id="s1">
+    <div class="card" id="c1" style="left:110px;top:110px;width:800px;height:800px">
+      <div id="pizzaIcon" class="abs" style="left:34px;top:30px;width:128px;height:128px"></div>
+      <div class="abs" style="left:186px;top:38px;font-size:50px;font-weight:800;letter-spacing:-1px;white-space:nowrap">Pizzaria Bella Massa</div>
+      <div class="abs" style="left:188px;top:102px;font-size:27px;color:var(--mute);font-weight:600">Pizzaria · <span style="color:var(--green)">Aberto agora</span></div>
+      <div class="abs gt" id="rate" style="left:36px;top:178px;font-size:132px;font-weight:900;letter-spacing:-5px;line-height:1.1">4,9</div>
+      <div class="abs" id="stars" style="left:302px;top:196px;font-size:62px;letter-spacing:4px;white-space:nowrap"></div>
+      <div class="abs" id="revcount" style="left:306px;top:278px;font-size:28px;color:var(--mute);font-weight:600">1.284 avaliações no Google</div>
+      <div class="bubble" id="r1" style="top:366px"><div class="av" style="background:#fbbf24">M</div><div class="st">★★★★★</div><div class="tx">Melhor pizza da cidade! 🍕</div></div>
+      <div class="bubble" id="r2" style="top:494px"><div class="av" style="background:#34d399">J</div><div class="st">★★★★★</div><div class="tx">Atendimento nota 10, voltarei!</div></div>
+      <div class="bubble" id="r3" style="top:622px"><div class="av" style="background:#22d3ee">A</div><div class="st">★★★★★</div><div class="tx">Sempre lotada no fim de semana</div></div>
+      <div id="gap" class="abs" style="left:36px;top:482px;width:728px;height:268px;border-radius:30px;border:4px dashed var(--violet2);background:rgba(10,8,34,.94);flex-direction:column;align-items:center;justify-content:center;gap:10px;display:none">
+        <div style="font-size:70px">🧩</div>
+        <div style="font-size:42px;font-weight:900;letter-spacing:-1px;white-space:nowrap">Falta aqui: <span class="gt">o seu produto</span></div>
+      </div>
+    </div>
+
+    <div class="card" id="c2" style="left:970px;top:110px;width:840px;height:800px">
+      <div class="abs" style="left:46px;top:36px;font-size:44px;font-weight:800;letter-spacing:-1px;white-space:nowrap">Movimento da semana</div>
+      <div class="abs" style="left:48px;top:96px;font-size:26px;color:var(--mute);font-weight:600">Pedidos e visitas por dia</div>
+      <div class="abs" id="plus" style="right:40px;top:34px;padding:12px 30px;border-radius:40px;font-size:52px;font-weight:900;background:linear-gradient(90deg,var(--violet),var(--cyan));box-shadow:0 0 60px rgba(124,92,255,.7);opacity:0">+0%</div>
+      <div class="abs" id="chart" style="left:50px;top:170px;width:740px;height:480px"></div>
+      <div id="lotado" class="abs" style="padding:10px 22px;border-radius:30px;background:rgba(251,113,133,.18);border:2px solid var(--red);font-size:28px;font-weight:800;color:var(--red);white-space:nowrap;opacity:0">🔥 Lotado</div>
+    </div>
+  </div>
+
+  <!-- CENA 3 -->
+  <div class="scene" id="s3">
+    <svg class="abs" style="inset:0" width="1920" height="1080" id="map"></svg>
+    <div id="pins"></div>
+    <div class="card" id="cnt" style="left:90px;top:100px;width:760px;height:360px;background:rgba(10,10,28,.9);opacity:0">
+      <div class="abs" style="left:48px;top:30px;font-size:30px;font-weight:800;color:var(--cyan);letter-spacing:4px">NA SUA CIDADE</div>
+      <div class="abs gt" id="big" style="left:44px;top:62px;font-size:200px;font-weight:900;letter-spacing:-8px;line-height:1.15">0</div>
+      <div class="abs" style="left:52px;top:292px;font-size:36px;font-weight:700;color:var(--ink)">empresas iguais a essa</div>
+    </div>
+    <div class="chip" id="k1" style="left:1220px;top:150px;opacity:0"><div class="ic" style="background:rgba(251,146,60,.2)">🍕</div>Pizzaria</div>
+    <div class="chip" id="k2" style="left:1220px;top:290px;opacity:0"><div class="ic" style="background:rgba(251,113,133,.2)">🍔</div>Hamburgueria</div>
+    <div class="chip" id="k3" style="left:1220px;top:430px;opacity:0"><div class="ic" style="background:rgba(34,211,238,.2)">💈</div>Barbearia</div>
+    <div class="chip" id="k4" style="left:1220px;top:570px;opacity:0"><div class="ic" style="background:rgba(52,211,153,.2)">🐾</div>Petshop</div>
+    <div class="chip" id="k5" style="left:1220px;top:710px;opacity:0"><div class="ic" style="background:rgba(167,139,250,.25)">✨</div>E muito mais…</div>
+  </div>
+
+  <!-- CENA 4 -->
+  <div class="scene" id="s4">
+    <div class="card" id="win" style="left:120px;top:80px;width:1680px;height:820px;border-radius:36px;background:linear-gradient(160deg,#12132c,#0b0b20)">
+      <div class="abs" style="left:34px;top:26px;display:flex;gap:12px"><i style="width:18px;height:18px;border-radius:50%;background:#fb7185"></i><i style="width:18px;height:18px;border-radius:50%;background:#fbbf24"></i><i style="width:18px;height:18px;border-radius:50%;background:#34d399"></i></div>
+      <div class="abs" style="left:0;right:0;top:20px;text-align:center;font-size:26px;font-weight:700;color:var(--mute)">✦ Lumora · Extrator de leads</div>
+      <div class="abs" id="inp" style="left:40px;top:84px;width:1130px;height:92px;border-radius:26px;background:rgba(255,255,255,.07);border:2px solid var(--violet);box-shadow:0 0 50px rgba(124,92,255,.35);padding:0 34px;display:flex;align-items:center;font-size:36px;font-weight:700"><span style="margin-right:20px">🔎</span><span id="typed"></span><span id="caret" style="display:inline-block;width:4px;height:44px;background:var(--cyan);margin-left:4px"></span></div>
+      <div class="abs" id="go" style="left:1200px;top:84px;width:440px;height:92px;border-radius:26px;background:linear-gradient(90deg,var(--violet),var(--cyan));font-size:36px;font-weight:900;display:flex;align-items:center;justify-content:center">⚡ Extrair leads</div>
+      <div class="abs" style="left:40px;top:208px;width:1060px;height:40px;font-size:22px;font-weight:800;color:var(--mute);letter-spacing:2px">
+        <span class="abs" style="left:30px">EMPRESA</span><span class="abs" style="left:420px">TELEFONE</span><span class="abs" style="left:680px">NOTA</span><span class="abs" style="left:820px">SITE</span><span class="abs" style="left:975px">ZAP</span>
+      </div>
+      <div class="abs" id="rows" style="left:40px;top:254px;width:1060px;height:540px"></div>
+      <div class="abs" id="panel" style="left:1140px;top:208px;width:500px;height:570px;border-radius:30px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);padding:34px">
+        <div style="font-size:24px;font-weight:800;color:var(--cyan);letter-spacing:3px">LEADS EXTRAÍDOS</div>
+        <div class="gt" id="leadnum" style="font-size:130px;font-weight:900;letter-spacing:-5px;line-height:1.2;margin-top:4px">0</div>
+        <div style="height:16px;border-radius:10px;background:rgba(255,255,255,.1);margin:6px 0 26px;overflow:hidden"><div id="prog" style="height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,var(--violet),var(--cyan))"></div></div>
+        <div style="display:flex;flex-direction:column;gap:16px;font-size:30px;font-weight:800">
+          <div id="e1" style="padding:14px 22px;border-radius:20px;background:rgba(52,211,153,.14);border:2px solid var(--green);opacity:0">📞 Telefone + WhatsApp</div>
+          <div id="e2" style="padding:14px 22px;border-radius:20px;background:rgba(251,191,36,.14);border:2px solid var(--amber);opacity:0">⭐ Nota e avaliações</div>
+          <div id="e3" style="padding:14px 22px;border-radius:20px;background:rgba(124,92,255,.2);border:2px solid var(--violet2);opacity:0">📥 Exportar planilha</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENA 5 -->
+  <div class="scene" id="s5">
+    <div class="abs" id="ring1" style="left:960px;top:340px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--violet2);opacity:0"></div>
+    <div class="abs" id="ring2" style="left:960px;top:340px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--cyan);opacity:0"></div>
+    <div class="abs" id="logo" style="left:960px;top:340px;width:180px;height:180px;margin:-90px 0 0 -90px">
+      <svg viewBox="0 0 100 100" width="180" height="180"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+        <rect x="4" y="4" width="92" height="92" rx="28" fill="url(#lg)"/>
+        <path d="M34 24 V66 Q34 74 42 74 H68" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M66 22 l3.5 9 9 3.5 -9 3.5 -3.5 9 -3.5 -9 -9 -3.5 9 -3.5z" fill="#fff"/></svg>
+    </div>
+    <div class="abs" id="word" style="left:0;right:0;top:470px;text-align:center;font-size:190px;font-weight:900;letter-spacing:-8px;line-height:1.2"><span class="gt">Lumora</span></div>
+    <div class="abs" id="tag" style="left:0;right:0;top:700px;text-align:center;font-size:56px;font-weight:700;color:var(--ink)">Extraia leads. <span class="gt">Encha sua agenda.</span></div>
+    <div class="abs" id="cta" style="left:960px;top:830px;width:560px;height:110px;margin-left:-280px;border-radius:60px;background:linear-gradient(90deg,var(--violet),var(--cyan));font-size:50px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 90px rgba(124,92,255,.7);overflow:hidden">Teste grátis →<div id="shine" style="position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg)"></div></div>
+  </div>
+
+  <div id="sub"></div>
+  <div class="abs" id="flash" style="inset:0;background:#fff;opacity:0;pointer-events:none"></div>
+  <div class="abs" style="inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%)"></div>
+</div>
+
+<script>
+const W=1920,H=1080;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const eo3=x=>1-Math.pow(1-x,3), eo4=x=>1-Math.pow(1-x,4), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eob=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+let seed=7; const rnd=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296};
+const $=id=>document.getElementById(id);
+
+/* fundo */
+(function(){
+  let s='';for(let x=60;x<W;x+=80)for(let y=60;y<H;y+=80)s+=`<circle cx="${x}" cy="${y}" r="2" fill="rgba(255,255,255,.07)"/>`;
+  $('dots').innerHTML=s;
+  let h='';for(let i=0;i<46;i++){const sz=3+rnd()*6;h+=`<i class="abs" style="left:0;top:0;width:${sz}px;height:${sz}px;border-radius:50%;background:${i%2?'#a78bfa':'#22d3ee'};opacity:${.2+rnd()*.5}"></i>`}
+  $('parts').innerHTML=h;
+})();
+const parts=[...$('parts').children].map(el=>({el,x:rnd()*W,y:rnd()*H,sp:20+rnd()*60,ph:rnd()*6.28}));
+
+function pizza(sz){
+  let pep='';[[50,28],[72,46],[66,72],[34,70],[28,46],[50,52]].forEach(([x,y])=>pep+=`<circle cx="${x}" cy="${y}" r="7" fill="#b91c1c"/><circle cx="${x-2}" cy="${y-2}" r="2" fill="#ef4444"/>`);
+  return `<svg viewBox="0 0 100 100" width="${sz}" height="${sz}"><circle cx="50" cy="50" r="46" fill="#f4a63a"/><circle cx="50" cy="50" r="40" fill="#ef4444"/><circle cx="50" cy="50" r="36" fill="#ffd66b"/>${pep}<path d="M50 50 L50 14 M50 50 L86 50 M50 50 L50 86 M50 50 L14 50" stroke="rgba(0,0,0,.12)" stroke-width="1.2"/></svg>`;
+}
+$('pizzaIcon').innerHTML=pizza(128);
+
+/* cena 1 */
+const days=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], base=[.2,.24,.28,.36,.8,1,.9], pot=[.78,.82,.86,.9,0,0,0];
+const CH=480,BW=72,GAP=(740-7*BW)/6;
+(function(){
+  let h='';
+  for(let i=0;i<4;i++)h+=`<div class="abs" style="left:0;right:0;top:${i*160}px;height:1px;background:rgba(255,255,255,.08)"></div>`;
+  days.forEach((d,i)=>{
+    const x=i*(BW+GAP);
+    h+=`<div class="bar" id="gb${i}" style="left:${x}px;background:repeating-linear-gradient(135deg,rgba(167,139,250,.55) 0 10px,rgba(124,92,255,.25) 10px 20px);border:3px dashed var(--violet2);height:0;opacity:${i<4?1:0}"></div>`;
+    h+=`<div class="bar" id="bb${i}" style="left:${x}px;background:${i>=4?'linear-gradient(180deg,#fb7185,#f59e0b)':'linear-gradient(180deg,#6a70a8,#3a3f6b)'};height:0${i>=4?';box-shadow:0 0 40px rgba(251,113,133,.45)':''}"></div>`;
+    h+=`<div class="lbl" style="left:${x-14}px;top:${CH+16}px">${d}</div>`;
+  });
+  $('chart').innerHTML=h;
+  let st='';for(let i=0;i<5;i++)st+=`<span class="star" id="st${i}">★</span>`;
+  $('stars').innerHTML=st;
+})();
+
+/* cena 3 */
+const cats=['#fb923c','#fb7185','#22d3ee','#34d399','#a78bfa'];
+const pinData=[];
+(function(){
+  seed=99;
+  let m='<defs><radialGradient id="mg" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#16183a"/><stop offset="1" stop-color="#070714"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#mg)"/>';
+  for(let i=0;i<14;i++){const y=rnd()*1080;m+=`<path d="M-50 ${y} Q ${400+rnd()*400} ${y+(rnd()-.5)*300} ${1000+rnd()*400} ${y+(rnd()-.5)*300} T 2000 ${y+(rnd()-.5)*400}" stroke="rgba(255,255,255,${.05+rnd()*.05})" stroke-width="${3+rnd()*6}" fill="none"/>`}
+  for(let i=0;i<14;i++){const x=rnd()*1920;m+=`<path d="M${x} -50 Q ${x+(rnd()-.5)*400} 400 ${x+(rnd()-.5)*300} 700 T ${x+(rnd()-.5)*400} 1150" stroke="rgba(255,255,255,${.05+rnd()*.05})" stroke-width="${3+rnd()*6}" fill="none"/>`}
+  m+=`<path d="M-50 820 Q 500 700 900 880 T 2000 760" stroke="rgba(34,211,238,.18)" stroke-width="46" fill="none"/>`;
+  $('map').innerHTML=m;
+  pinData.push({x:1010,y:620,c:0,t:12.5,hero:true});
+  for(let i=0;i<300;i++){
+    let x,y;do{x=40+rnd()*1840;y=40+rnd()*1000}while(x<880&&y<480);
+    pinData.push({x,y,c:Math.floor(rnd()*5),t:13.4+Math.pow(i/300,.8)*4.6+rnd()*.25});
+  }
+  let h='';pinData.forEach((p,i)=>{h+=`<div class="pin" id="pn${i}" style="left:${p.x}px;top:${p.y}px;background:${cats[p.c]};opacity:0"></div>`});
+  $('pins').innerHTML=h;
+})();
+const pinEls=pinData.map((_,i)=>$('pn'+i));
+
+/* cena 4 */
+const leads=[
+ ['Burger do Zé','(19) 99812-4431','4,8','burgerdoze.com'],
+ ['Black Grill Hamburgueria','(19) 99764-1208','4,7','blackgrill.com'],
+ ['Barbearia Dom Navalha','(19) 99655-3390','4,9','domnavalha.com'],
+ ['Barber Club 88','(19) 99702-8854','4,8','club88.com'],
+ ['PetShop Amigo Fiel','(19) 99543-7712','4,9','amigofiel.pet'],
+ ['Pet & Cia Banho e Tosa','(19) 99620-1945','4,7','petecia.com'],
+ ['Pizzaria Bella Massa','(19) 99888-0077','4,9','bellamassa.com']
+];
+(function(){
+  let h='';
+  leads.forEach((l,i)=>{h+=`<div class="row" id="rw${i}" style="top:${i*76}px;opacity:0">
+      <span style="left:30px;width:370px;white-space:nowrap;overflow:hidden">${l[0]}</span>
+      <span style="left:420px;color:var(--cyan)">${l[1]}</span>
+      <span style="left:680px;color:var(--amber)">★ ${l[2]}</span>
+      <span style="left:820px;color:var(--mute);font-size:21px;width:150px;overflow:hidden;white-space:nowrap">${l[3]}</span>
+      <span style="left:972px;font-size:30px">💬</span></div>`});
+  $('rows').innerHTML=h;
+})();
+const query='Hamburgueria em Campinas, SP';
+
+/* legendas — tempos medidos da narração */
+const NARR=[
+ {t:0.6, d:6.03, ch:['Olha essa pizzaria: nota 4,9 no Google,','clientes elogiando e movimento todo fim de semana']},
+ {t:7.4, d:4.23, ch:['Mas ela não tem o seu produto,','que poderia deixar ela muito mais movimentada!']},
+ {t:12.4,d:6.73, ch:['E ela não é a única.','Na sua cidade tem centenas de empresas assim:','hamburgueria, barbearia, petshop e muito mais']},
+ {t:20.0,d:4.98, ch:['O Lumora encontra essas empresas,','extrai os leads','e entrega tudo pronto pra você vender']},
+ {t:26.0,d:1.79, ch:['Lumora. Teste agora.']}
+];
+const CHUNKS=[
+ [0.6,3.55,NARR[0].ch[0]],[3.8,6.7,NARR[0].ch[1]],
+ [7.4,9.5,NARR[1].ch[0]],[9.6,11.7,NARR[1].ch[1]],
+ [12.4,13.4,NARR[2].ch[0]],[13.69,15.9,NARR[2].ch[1]],[16.09,19.1,NARR[2].ch[2]],
+ [20.0,21.6,NARR[3].ch[0]],[21.7,22.62,NARR[3].ch[1]],[22.74,25.1,NARR[3].ch[2]],
+ [26.0,27.8,NARR[4].ch[0]]
+].map(([t0,t1,text])=>({t0,t1,text}));
+function subtitle(t){
+  const el=$('sub'), c=CHUNKS.find(c=>t>=c.t0&&t<c.t1+.1);
+  if(!c||t>27.9){el.style.opacity=0;el.innerHTML='';return}
+  const words=c.text.split(' '), p=(t-c.t0)/(c.t1-c.t0), a=seg(t,c.t0,c.t0+.15);
+  el.style.opacity=a;el.style.transform=`translateY(${(1-eo3(a))*24}px)`;
+  el.innerHTML='<span class="pill">'+words.map((w,i)=>`<span class="w ${i/words.length<=p?'on':''}">${w}</span>`).join(' ')+'</span>';
+}
+
+function vis(el,t,a,b,fin,fout,drift){
+  const i=seg(t,a,a+fin), o=1-seg(t,b-fout,b);
+  const op=(t<a||t>b)?0:eio(i)*eio(o);
+  el.style.opacity=op;
+  el.style.transform=`scale(${1+(1-eio(i))*.06-(1-eio(o))*.08+drift*Math.max(0,t-a)})`;
+  el.style.filter=op<.98?`blur(${(1-op)*14}px)`:'none';
+  el.style.display=op<=0?'none':'block';
+}
+
+function render(t){
+  $('b1').style.transform=`translate(${-100+Math.sin(t*.7)*260+300}px,${-200+Math.cos(t*.5)*160}px)`;
+  $('b2').style.transform=`translate(${1000+Math.cos(t*.6)*280}px,${300+Math.sin(t*.8)*180}px)`;
+  $('b3').style.transform=`translate(${700+Math.sin(t*.4)*400}px,${500+Math.cos(t*.9)*120}px)`;
+  parts.forEach(p=>{const y=((p.y-t*p.sp)%H+H)%H;p.el.style.transform=`translate(${p.x+Math.sin(t+p.ph)*30}px,${y}px)`});
+
+  vis($('s1'),t,0,12.7,.7,.6,.004);
+  vis($('s3'),t,12.4,20.5,.6,.6,.006);
+  vis($('s4'),t,20.2,26.4,.6,.5,.003);
+  vis($('s5'),t,26,31,.5,.01,0);
+
+  /* S1 */
+  const ci=eob(seg(t,.1,.9));
+  $('c1').style.transform=`translateX(${(1-ci)*-300}px) scale(${.9+.1*ci}) rotate(${(1-ci)*-4}deg)`;
+  $('c1').style.opacity=seg(t,.1,.5);
+  const c2i=eob(seg(t,.35,1.15));
+  $('c2').style.transform=`translateX(${(1-c2i)*300}px) scale(${.9+.1*c2i}) rotate(${(1-c2i)*4}deg)`;
+  $('c2').style.opacity=seg(t,.35,.75);
+  const rt=eo3(seg(t,.9,2.0)); $('rate').textContent=(4.9*rt).toFixed(1).replace('.',',');
+  for(let i=0;i<5;i++){const e=$('st'+i),k=eob(seg(t,1.0+i*.18,1.5+i*.18));e.style.transform=`scale(${k}) rotate(${(1-k)*-40}deg)`;e.style.opacity=clamp(k*2)}
+  $('revcount').style.opacity=seg(t,1.8,2.3);
+  [['r1',2.2],['r2',3.4],['r3',4.7]].forEach(([id,st])=>{
+    const k=eo4(seg(t,st,st+.6)), e=$(id), dim=id==='r1'?1:1-.9*seg(t,8.0,8.5);
+    e.style.opacity=k*dim; e.style.transform=`translateX(${(1-k)*-120}px) scale(${.92+.08*k})`;
+  });
+  days.forEach((d,i)=>{
+    const k=eob(seg(t,1.4+i*.18,2.3+i*.18));
+    const pulse=i>=4?1+Math.sin(t*5+i)*.015*seg(t,3,3.5):1;
+    $('bb'+i).style.height=(base[i]*CH*clamp(k,0,1.08)*pulse)+'px';
+    if(i<4){const gk=eob(seg(t,8.0+i*.18,8.9+i*.18));$('gb'+i).style.height=(pot[i]*CH*clamp(gk,0,1.05))+'px';}
+    $('gb'+i).style.zIndex=0;$('bb'+i).style.zIndex=1;
+  });
+  const lk=eob(seg(t,3.6,4.2)), lot=$('lotado');
+  lot.style.left=(50+5*(BW+GAP)-48)+'px'; lot.style.top='112px';
+  lot.style.opacity=clamp(lk*2)*(1-seg(t,7.6,8.0)); lot.style.transform=`scale(${lk}) translateY(${Math.sin(t*6)*3}px)`;
+  const gk2=eob(seg(t,8.0,8.8)), gp=$('gap');
+  gp.style.display=t<8?'none':'flex';
+  gp.style.opacity=seg(t,8.0,8.5); gp.style.transform=`scale(${.7+.3*gk2}) rotate(${(1-gk2)*3}deg)`;
+  gp.style.borderColor=`rgba(167,139,250,${.65+.35*Math.sin(t*7)})`;
+  const pk=eob(seg(t,9.2,10.0)), pv=Math.round(137*eo3(seg(t,9.3,11.2)));
+  $('plus').textContent='+'+pv+'%'; $('plus').style.opacity=clamp(pk*2); $('plus').style.transform=`scale(${.5+.5*pk}) translateY(${Math.sin(t*4)*3}px)`;
+
+  /* S3 */
+  const ck=eob(seg(t,12.6,13.4)), cn=$('cnt');
+  cn.style.opacity=seg(t,12.6,13.0); cn.style.transform=`translateY(${(1-ck)*-80}px) scale(${.85+.15*ck})`;
+  $('big').textContent=Math.round(312*eo3(seg(t,13.4,18.4)));
+  pinData.forEach((p,i)=>{
+    const e=pinEls[i], k=clamp((t-p.t)/.45);
+    if(k<=0){e.style.opacity=0;return}
+    const col=p.hero?'#fb923c':cats[p.c];
+    const sc=p.hero?eob(k)*1.9+Math.sin(t*5)*.12:eob(k);
+    e.style.opacity=1; e.style.transform=`scale(${sc})`; e.style.background=col;
+    const ring=clamp((t-p.t)/1.4);
+    e.style.boxShadow=ring<1?`0 0 0 ${ring*46}px ${col}${Math.round((1-ring)*80).toString(16).padStart(2,'0')}, 0 0 20px ${col}`:`0 0 18px ${col}`;
+  });
+  [['k1',12.9],['k2',16.1],['k3',16.8],['k4',17.5],['k5',18.1]].forEach(([id,st])=>{
+    const k=eob(seg(t,st,st+.55)), e=$(id);
+    e.style.opacity=clamp(k*2); e.style.transform=`translateX(${(1-k)*400}px) scale(${.85+.15*k})`;
+  });
+
+  /* S4 */
+  const wk=eob(seg(t,20.3,21.0)); $('win').style.transform=`translateY(${(1-wk)*140}px) scale(${.92+.08*wk})`;
+  const tp=seg(t,20.7,22.1); $('typed').textContent=query.slice(0,Math.floor(tp*query.length));
+  $('caret').style.opacity=(tp>0&&tp<1)||Math.floor(t*3)%2===0?1:0;
+  const press=seg(t,22.15,22.45); $('go').style.transform=`scale(${1-Math.sin(press*Math.PI)*.08})`;
+  $('go').style.boxShadow=t>22.1?`0 0 ${40+Math.sin(t*8)*20}px rgba(34,211,238,.8)`:'none';
+  leads.forEach((l,i)=>{
+    const st=22.6+i*.42, k=eo4(seg(t,st,st+.45)), e=$('rw'+i);
+    e.style.opacity=k; e.style.transform=`translateX(${(1-k)*160}px)`;
+    e.style.background=(t>st&&t<st+.7)?'rgba(124,92,255,.28)':'rgba(255,255,255,.05)';
+  });
+  const pr=eo3(seg(t,22.6,25.8));
+  $('leadnum').textContent=Math.round(1248*pr).toLocaleString('pt-BR'); $('prog').style.width=(100*pr)+'%';
+  [['e1',23.4],['e2',24.1],['e3',24.8]].forEach(([id,st])=>{const k=eob(seg(t,st,st+.5)),e=$(id);e.style.opacity=clamp(k*2);e.style.transform=`translateX(${(1-k)*80}px) scale(${.9+.1*k})`});
+
+  /* S5 */
+  const l5=eob(seg(t,26.1,26.9));
+  $('logo').style.transform=`scale(${l5}) rotate(${(1-l5)*-180}deg)`; $('logo').style.opacity=clamp(l5*2);
+  [['ring1',0],['ring2',.35]].forEach(([id,d])=>{const r=Math.max(0,((t-26.2-d)%1.6))/1.6,e=$(id);e.style.opacity=t>26.2+d?(1-r)*.7:0;e.style.transform=`scale(${.5+r*3.4})`});
+  const w5=eo4(seg(t,26.5,27.2)); $('word').style.opacity=w5; $('word').style.transform=`translateY(${(1-w5)*60}px) scale(${.9+.1*w5})`;
+  const tk=eo4(seg(t,27.0,27.6)); $('tag').style.opacity=tk; $('tag').style.transform=`translateY(${(1-tk)*40}px)`;
+  const bk=eob(seg(t,27.5,28.2)); $('cta').style.opacity=clamp(bk*2); $('cta').style.transform=`scale(${(.6+.4*bk)})`;
+  $('shine').style.left=(-200+((t*0.9)%1.4)/1.4*900)+'px';
+
+  let fl=0;[7.4,12.4,20.2,26.0].forEach(h=>{if(t>=h)fl=Math.max(fl,(1-seg(t,h,h+.25))*.22)});
+  $('flash').style.opacity=fl;
+  subtitle(t);
+}
+window.render=render;
+render(0);
+</script>
+</body>
+</html>
