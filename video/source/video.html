@@ -113,18 +113,68 @@
 
   <!-- CENA 5 -->
   <div class="scene" id="s5">
-    <div class="abs" id="ring1" style="left:960px;top:340px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--violet2);opacity:0"></div>
-    <div class="abs" id="ring2" style="left:960px;top:340px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--cyan);opacity:0"></div>
-    <div class="abs" id="logo" style="left:960px;top:340px;width:180px;height:180px;margin:-90px 0 0 -90px">
+    <div class="abs" id="ring1" style="left:960px;top:390px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--violet2);opacity:0"></div>
+    <div class="abs" id="ring2" style="left:960px;top:390px;width:300px;height:300px;margin:-150px;border-radius:50%;border:4px solid var(--cyan);opacity:0"></div>
+    <div class="abs" id="logo" style="left:960px;top:390px;width:180px;height:180px;margin:-90px 0 0 -90px">
       <svg viewBox="0 0 100 100" width="180" height="180"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
         <rect x="4" y="4" width="92" height="92" rx="28" fill="url(#lg)"/>
         <path d="M34 24 V66 Q34 74 42 74 H68" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         <path d="M66 22 l3.5 9 9 3.5 -9 3.5 -3.5 9 -3.5 -9 -9 -3.5 9 -3.5z" fill="#fff"/></svg>
     </div>
-    <div class="abs" id="word" style="left:0;right:0;top:470px;text-align:center;font-size:190px;font-weight:900;letter-spacing:-8px;line-height:1.2"><span class="gt">Lumora</span></div>
-    <div class="abs" id="tag" style="left:0;right:0;top:700px;text-align:center;font-size:56px;font-weight:700;color:var(--ink)">Extraia leads. <span class="gt">Encha sua agenda.</span></div>
-    <div class="abs" id="cta" style="left:960px;top:830px;width:560px;height:110px;margin-left:-280px;border-radius:60px;background:linear-gradient(90deg,var(--violet),var(--cyan));font-size:50px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 90px rgba(124,92,255,.7);overflow:hidden">Teste grátis →<div id="shine" style="position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg)"></div></div>
+    <div class="abs" id="word" style="left:0;right:0;top:520px;text-align:center;font-size:190px;font-weight:900;letter-spacing:-8px;line-height:1.2"><span class="gt">Lumora</span></div>
+    <div class="abs" id="tag" style="left:0;right:0;top:750px;text-align:center;font-size:56px;font-weight:700;color:var(--ink)">Extraia leads. <span class="gt">Encha sua agenda.</span></div>
+
   </div>
+
+  <!-- HERO: pizzaria -->
+  <div class="abs" id="hero" style="left:560px;top:60px;width:800px;height:760px;opacity:0">
+    <svg viewBox="0 0 800 760" width="800" height="760" style="overflow:visible">
+      <defs>
+        <linearGradient id="roofg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ef5a22"/><stop offset="1" stop-color="#b8330f"/></linearGradient>
+        <linearGradient id="wallg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1d4"/><stop offset="1" stop-color="#f3d39a"/></linearGradient>
+        <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd66b" stop-opacity=".85"/><stop offset="1" stop-color="#ffd66b" stop-opacity="0"/></radialGradient>
+        <radialGradient id="winlight" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#fff3b0"/><stop offset="1" stop-color="#f7b955"/></radialGradient>
+      </defs>
+      <ellipse cx="400" cy="712" rx="380" ry="34" fill="rgba(0,0,0,.5)"/>
+      <g id="hSmoke"></g>
+      <g id="hBuilding">
+        <rect x="560" y="110" width="62" height="150" rx="6" fill="#8a2c0d"/><rect x="550" y="100" width="82" height="24" rx="8" fill="#6b210a"/>
+        <polygon points="60,330 400,96 740,330" fill="url(#roofg)"/>
+        <g id="hShingles" stroke="rgba(0,0,0,.14)" stroke-width="4" fill="none"></g>
+        <rect x="104" y="326" width="592" height="372" rx="16" fill="url(#wallg)" stroke="#e1b56c" stroke-width="4"/>
+        <!-- sign board -->
+        <g id="hBoard"><rect x="205" y="350" width="390" height="82" rx="20" fill="#241a4a" stroke="#ffd66b" stroke-width="6"/>
+          <text x="400" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="58" letter-spacing="5" fill="#ffd66b">PIZZARIA</text></g>
+        <!-- windows -->
+        <g id="hWinL"><rect x="128" y="548" width="196" height="136" rx="14" fill="url(#winlight)" stroke="#8a5a2b" stroke-width="9"/>
+          <path d="M226 548 V684 M128 616 H324" stroke="#8a5a2b" stroke-width="6"/>
+          <rect x="150" y="650" width="152" height="18" rx="6" fill="#8a5a2b"/>
+          <g transform="translate(176 568) scale(.5)"><circle cx="50" cy="50" r="46" fill="#f4a63a"/><circle cx="50" cy="50" r="40" fill="#ef4444"/><circle cx="50" cy="50" r="36" fill="#ffd66b"/><circle cx="50" cy="28" r="7" fill="#b91c1c"/><circle cx="72" cy="46" r="7" fill="#b91c1c"/><circle cx="34" cy="70" r="7" fill="#b91c1c"/><circle cx="28" cy="46" r="7" fill="#b91c1c"/><circle cx="62" cy="72" r="7" fill="#b91c1c"/></g></g>
+        <g id="hWinR"><rect x="476" y="548" width="196" height="136" rx="14" fill="url(#winlight)" stroke="#8a5a2b" stroke-width="9"/>
+          <path d="M574 548 V684 M476 616 H672" stroke="#8a5a2b" stroke-width="6"/>
+          <rect x="498" y="640" width="70" height="28" rx="4" fill="#d9a35b"/><rect x="498" y="640" width="70" height="8" fill="#ef4444"/>
+          <rect x="506" y="612" width="70" height="28" rx="4" fill="#e6b26a"/><rect x="506" y="612" width="70" height="8" fill="#ef4444"/>
+          <g transform="translate(590 590) scale(.62)"><circle cx="50" cy="50" r="46" fill="#f4a63a"/><circle cx="50" cy="50" r="40" fill="#ef4444"/><circle cx="50" cy="50" r="36" fill="#ffd66b"/><circle cx="50" cy="30" r="7" fill="#b91c1c"/><circle cx="70" cy="56" r="7" fill="#b91c1c"/><circle cx="32" cy="60" r="7" fill="#b91c1c"/></g></g>
+        <!-- door -->
+        <g id="hDoor"><rect x="344" y="520" width="112" height="178" rx="16" fill="#7c3a1a" stroke="#5a2810" stroke-width="6"/>
+          <circle cx="400" cy="578" r="28" fill="url(#winlight)" stroke="#5a2810" stroke-width="6"/>
+          <circle cx="436" cy="620" r="7" fill="#ffd66b"/>
+          <g id="hOpen"><rect x="362" y="640" width="76" height="32" rx="8" fill="#16a34a"/><text x="400" y="663" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="20" fill="#fff">ABERTO</text></g></g>
+        <!-- plants -->
+        <g><rect x="62" y="650" width="44" height="48" rx="8" fill="#b45309"/><circle cx="84" cy="636" r="30" fill="#22c55e"/><circle cx="66" cy="650" r="18" fill="#16a34a"/><circle cx="102" cy="650" r="18" fill="#16a34a"/>
+           <rect x="694" y="650" width="44" height="48" rx="8" fill="#b45309"/><circle cx="716" cy="636" r="30" fill="#22c55e"/><circle cx="698" cy="650" r="18" fill="#16a34a"/><circle cx="734" cy="650" r="18" fill="#16a34a"/></g>
+        <!-- awning -->
+        <g id="hAwn"></g>
+      </g>
+      <!-- pizza sign on roof -->
+      <g id="hPizza">
+        <circle cx="400" cy="214" r="118" fill="url(#glow)"/>
+        <circle cx="400" cy="214" r="92" fill="#241a4a" stroke="#ffd66b" stroke-width="7"/>
+        <svg x="324" y="138" width="152" height="152" viewBox="0 0 100 100" id="hPizzaSvg"></svg>
+      </g>
+    </svg>
+  </div>
+  <div class="abs" id="heroName" style="left:560px;width:800px;top:808px;text-align:center;opacity:0"><span style="display:inline-block;padding:10px 40px 14px;border-radius:50px;background:rgba(255,255,255,.1);border:2px solid var(--line);font-size:46px;font-weight:800;letter-spacing:-1px">Pizzaria Bella Massa</span></div>
 
   <div id="sub"></div>
   <div class="abs" id="flash" style="inset:0;background:#fff;opacity:0;pointer-events:none"></div>
@@ -154,6 +204,20 @@ function pizza(sz){
   return `<svg viewBox="0 0 100 100" width="${sz}" height="${sz}"><circle cx="50" cy="50" r="46" fill="#f4a63a"/><circle cx="50" cy="50" r="40" fill="#ef4444"/><circle cx="50" cy="50" r="36" fill="#ffd66b"/>${pep}<path d="M50 50 L50 14 M50 50 L86 50 M50 50 L50 86 M50 50 L14 50" stroke="rgba(0,0,0,.12)" stroke-width="1.2"/></svg>`;
 }
 $('pizzaIcon').innerHTML=pizza(128);
+(function(){
+  const pz=pizza(100).replace(/<svg[^>]*>/,'').replace('</svg>','');
+  $('hPizzaSvg').innerHTML=pz;
+  let aw='';
+  for(let i=0;i<9;i++){const x=80+i*71.1,c=i%2?'#fff7ed':'#ef4444';aw+=`<rect x="${x}" y="446" width="71.2" height="48" fill="${c}"/><circle cx="${x+35.6}" cy="494" r="35.6" fill="${c}"/>`}
+  aw+='<rect x="76" y="436" width="648" height="16" rx="8" fill="#9f1d1d"/>';
+  for(let i=0;i<14;i++)aw+=`<circle id="hb${i}" cx="${100+i*46.2}" cy="444" r="7" fill="#fff3b0"/>`;
+  $('hAwn').innerHTML=aw;
+  let sh='';for(let r=0;r<6;r++)for(let c=0;c<14;c++){const y=150+r*30;const x1=400-(y-96)*1.45+c*0;}
+  let ls='';for(let r=1;r<7;r++){const y=96+r*34;const dx=(y-96)*1.447;ls+=`M${400-dx} ${y} H${400+dx} `}
+  $('hShingles').innerHTML=`<path d="${ls}"/>`;
+  let sm='';for(let j=0;j<4;j++)sm+=`<circle id="hs${j}" cx="590" cy="100" r="18" fill="#fff" opacity="0"/>`;
+  $('hSmoke').innerHTML=sm;
+})();
 
 /* cena 1 */
 const days=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], base=[.2,.24,.28,.36,.8,1,.9], pot=[.78,.82,.86,.9,0,0,0];
@@ -220,18 +284,18 @@ const NARR=[
  {t:7.4, d:4.23, ch:['Mas ela não tem o seu produto,','que poderia deixar ela muito mais movimentada!']},
  {t:12.4,d:6.73, ch:['E ela não é a única.','Na sua cidade tem centenas de empresas assim:','hamburgueria, barbearia, petshop e muito mais']},
  {t:20.0,d:4.98, ch:['O Lumora encontra essas empresas,','extrai os leads','e entrega tudo pronto pra você vender']},
- {t:26.0,d:1.79, ch:['Lumora. Teste agora.']}
+ {t:26.0,d:3.5, ch:['Lumora.','Seus próximos clientes, prontos pra você.']}
 ];
 const CHUNKS=[
  [0.6,3.55,NARR[0].ch[0]],[3.8,6.7,NARR[0].ch[1]],
  [7.4,9.5,NARR[1].ch[0]],[9.6,11.7,NARR[1].ch[1]],
  [12.4,13.4,NARR[2].ch[0]],[13.69,15.9,NARR[2].ch[1]],[16.09,19.1,NARR[2].ch[2]],
  [20.0,21.6,NARR[3].ch[0]],[21.7,22.62,NARR[3].ch[1]],[22.74,25.1,NARR[3].ch[2]],
- [26.0,27.8,NARR[4].ch[0]]
+ [26.0,26.75,NARR[4].ch[0]],[26.8,29.6,NARR[4].ch[1]]
 ].map(([t0,t1,text])=>({t0,t1,text}));
 function subtitle(t){
   const el=$('sub'), c=CHUNKS.find(c=>t>=c.t0&&t<c.t1+.1);
-  if(!c||t>27.9){el.style.opacity=0;el.innerHTML='';return}
+  if(!c||t>29.7){el.style.opacity=0;el.innerHTML='';return}
   const words=c.text.split(' '), p=(t-c.t0)/(c.t1-c.t0), a=seg(t,c.t0,c.t0+.15);
   el.style.opacity=a;el.style.transform=`translateY(${(1-eo3(a))*24}px)`;
   el.innerHTML='<span class="pill">'+words.map((w,i)=>`<span class="w ${i/words.length<=p?'on':''}">${w}</span>`).join(' ')+'</span>';
@@ -257,28 +321,48 @@ function render(t){
   vis($('s4'),t,20.2,26.4,.6,.5,.003);
   vis($('s5'),t,26,31,.5,.01,0);
 
+  /* HERO */
+  (function(){
+    const hk=eob(seg(t,.1,1.0)), exit=eio(seg(t,3.2,3.95));
+    const hero=$('hero');
+    hero.style.opacity=clamp(hk*3)*(1-seg(exit,.7,1));
+    hero.style.transform=`translate(${-752*exit}px,${-215*exit}px) scale(${1-.84*exit})`;
+    const sy=Math.max(.001,hk), sx=1+(1-hk)*.15;
+    $('hBuilding').setAttribute('transform',`translate(400 698) scale(${sx} ${sy}) translate(-400 -698)`);
+    const ak=eo4(seg(t,.8,1.4)); $('hAwn').setAttribute('transform',`translate(0 ${-(1-ak)*110})`); $('hAwn').style.opacity=clamp(ak*2);
+    const bk=eob(seg(t,1.05,1.85));
+    $('hPizza').setAttribute('transform',`translate(400 214) rotate(${(1-bk)*-300+Math.sin(t*2.2)*5*seg(t,1.9,2.3)}) scale(${bk*(1+Math.sin(t*4)*.025)}) translate(-400 -214)`);
+    $('hPizza').style.opacity=clamp(bk*2);
+    $('hBoard').style.opacity=seg(t,1.3,1.8);
+    for(let i=0;i<14;i++)$('hb'+i).setAttribute('fill',(Math.floor(t*4)+i)%2?'#fff3b0':'#f59e0b');
+    $('hOpen').setAttribute('transform',`rotate(${Math.sin(t*3)*3} 400 640)`);
+    for(let j=0;j<4;j++){const ph=((t*.45+j*.25)%1),e=$('hs'+j);e.setAttribute('cx',590+Math.sin(ph*6+j)*16);e.setAttribute('cy',100-ph*170);e.setAttribute('r',14+ph*26);e.setAttribute('opacity',(1-ph)*.45*seg(t,1.2,1.6))}
+    const nk=eo4(seg(t,1.8,2.4)), nx=1-seg(t,3.0,3.4);
+    $('heroName').style.opacity=nk*nx; $('heroName').style.transform=`translateY(${(1-nk)*30}px)`;
+  })();
   /* S1 */
-  const ci=eob(seg(t,.1,.9));
+  const u=t<3.3?-1:(t-3.3)*1.4;
+  const ci=eob(seg(u,.1,.9));
   $('c1').style.transform=`translateX(${(1-ci)*-300}px) scale(${.9+.1*ci}) rotate(${(1-ci)*-4}deg)`;
-  $('c1').style.opacity=seg(t,.1,.5);
-  const c2i=eob(seg(t,.35,1.15));
+  $('c1').style.opacity=seg(u,.1,.5);
+  const c2i=eob(seg(u,.35,1.15));
   $('c2').style.transform=`translateX(${(1-c2i)*300}px) scale(${.9+.1*c2i}) rotate(${(1-c2i)*4}deg)`;
-  $('c2').style.opacity=seg(t,.35,.75);
-  const rt=eo3(seg(t,.9,2.0)); $('rate').textContent=(4.9*rt).toFixed(1).replace('.',',');
-  for(let i=0;i<5;i++){const e=$('st'+i),k=eob(seg(t,1.0+i*.18,1.5+i*.18));e.style.transform=`scale(${k}) rotate(${(1-k)*-40}deg)`;e.style.opacity=clamp(k*2)}
-  $('revcount').style.opacity=seg(t,1.8,2.3);
+  $('c2').style.opacity=seg(u,.35,.75);
+  const rt=eo3(seg(u,.9,2.0)); $('rate').textContent=(4.9*rt).toFixed(1).replace('.',',');
+  for(let i=0;i<5;i++){const e=$('st'+i),k=eob(seg(u,1.0+i*.18,1.5+i*.18));e.style.transform=`scale(${k}) rotate(${(1-k)*-40}deg)`;e.style.opacity=clamp(k*2)}
+  $('revcount').style.opacity=seg(u,1.8,2.3);
   [['r1',2.2],['r2',3.4],['r3',4.7]].forEach(([id,st])=>{
-    const k=eo4(seg(t,st,st+.6)), e=$(id), dim=id==='r1'?1:1-.9*seg(t,8.0,8.5);
+    const k=eo4(seg(u,st,st+.6)), e=$(id), dim=id==='r1'?1:1-.9*seg(t,8.0,8.5);
     e.style.opacity=k*dim; e.style.transform=`translateX(${(1-k)*-120}px) scale(${.92+.08*k})`;
   });
   days.forEach((d,i)=>{
-    const k=eob(seg(t,1.4+i*.18,2.3+i*.18));
-    const pulse=i>=4?1+Math.sin(t*5+i)*.015*seg(t,3,3.5):1;
+    const k=eob(seg(u,1.4+i*.18,2.3+i*.18));
+    const pulse=i>=4?1+Math.sin(t*5+i)*.015*seg(u,3,3.5):1;
     $('bb'+i).style.height=(base[i]*CH*clamp(k,0,1.08)*pulse)+'px';
     if(i<4){const gk=eob(seg(t,8.0+i*.18,8.9+i*.18));$('gb'+i).style.height=(pot[i]*CH*clamp(gk,0,1.05))+'px';}
     $('gb'+i).style.zIndex=0;$('bb'+i).style.zIndex=1;
   });
-  const lk=eob(seg(t,3.6,4.2)), lot=$('lotado');
+  const lk=eob(seg(u,3.6,4.2)), lot=$('lotado');
   lot.style.left=(50+5*(BW+GAP)-48)+'px'; lot.style.top='112px';
   lot.style.opacity=clamp(lk*2)*(1-seg(t,7.6,8.0)); lot.style.transform=`scale(${lk}) translateY(${Math.sin(t*6)*3}px)`;
   const gk2=eob(seg(t,8.0,8.8)), gp=$('gap');
@@ -327,8 +411,6 @@ function render(t){
   [['ring1',0],['ring2',.35]].forEach(([id,d])=>{const r=Math.max(0,((t-26.2-d)%1.6))/1.6,e=$(id);e.style.opacity=t>26.2+d?(1-r)*.7:0;e.style.transform=`scale(${.5+r*3.4})`});
   const w5=eo4(seg(t,26.5,27.2)); $('word').style.opacity=w5; $('word').style.transform=`translateY(${(1-w5)*60}px) scale(${.9+.1*w5})`;
   const tk=eo4(seg(t,27.0,27.6)); $('tag').style.opacity=tk; $('tag').style.transform=`translateY(${(1-tk)*40}px)`;
-  const bk=eob(seg(t,27.5,28.2)); $('cta').style.opacity=clamp(bk*2); $('cta').style.transform=`scale(${(.6+.4*bk)})`;
-  $('shine').style.left=(-200+((t*0.9)%1.4)/1.4*900)+'px';
 
   let fl=0;[7.4,12.4,20.2,26.0].forEach(h=>{if(t>=h)fl=Math.max(fl,(1-seg(t,h,h+.25))*.22)});
   $('flash').style.opacity=fl;

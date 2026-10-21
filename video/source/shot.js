@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
 const path = require('path');
 (async () => {
-  const [,, mode, a, b, out] = process.argv;
+  const [,, mode, a, b, out0] = process.argv; const out = out0 || b;
   const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('pageerror', e => console.error('PAGEERR', e.message));

@@ -101,9 +101,13 @@ def ding(t, m=84):
     n = int(.8 * SR); tm = tt(n)
     add(sfx, (np.sin(2 * np.pi * midi(m) * tm) + .4 * np.sin(2 * np.pi * midi(m + 12) * tm)) * np.exp(-tm * 5) * .12, t)
 for h in (7.4, 12.4, 20.2, 26.0): whoosh(h - .25)
-for i in range(7): pop(1.4 + i * .18, 500 + i * 60)
-for i in range(5): ding(1.0 + i * .18, 72 + i * 2)
-pop(3.6, 1200, .2); pop(4.7); pop(3.4); pop(2.2)
+U = lambda u: 3.3 + u / 1.4
+whoosh(0.0, .6); pop(0.35, 500, .2); pop(1.05, 800, .2); pop(1.3, 1000, .15)
+for i in range(5): ding(1.3 + i * .12, 72 + i * 2)
+whoosh(3.0, .7)
+for i in range(7): pop(U(1.4 + i * .18), 500 + i * 60)
+for i in range(5): ding(U(1.0 + i * .18), 72 + i * 2)
+pop(U(3.6), 1200, .2); pop(U(4.7)); pop(U(3.4)); pop(U(2.2))
 pop(8.0, 700, .2); ding(9.3, 88)
 for i in range(60): pop(13.4 + (i / 60) ** .8 * 4.6, 700 + (i % 7) * 120, .06)
 for t in (12.9, 16.1, 16.8, 17.5, 18.1): pop(t, 1100, .2)
@@ -111,7 +115,7 @@ for i in range(28): click(20.7 + i * 1.4 / 28)
 pop(22.15, 600, .25)
 for i in range(7): pop(22.6 + i * .42, 800 + i * 70, .12)
 for t in (23.4, 24.1, 24.8): ding(t, 91)
-ding(26.1, 84); ding(26.5, 91); ding(27.5, 96)
+ding(26.1, 84); ding(26.5, 91)
 
 # ---- narracao ----
 def load(p):
