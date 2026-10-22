@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lumora — anúncio 30s (todas as funções)</title>
+<style>
+  @font-face{font-family:'Sora';font-weight:600;src:url(assets/fonts/sora-latin-600-normal.woff2) format('woff2')}
+  @font-face{font-family:'Sora';font-weight:700;src:url(assets/fonts/sora-latin-700-normal.woff2) format('woff2')}
+  @font-face{font-family:'Sora';font-weight:800;src:url(assets/fonts/sora-latin-800-normal.woff2) format('woff2')}
+  @font-face{font-family:'Manrope';font-weight:500;src:url(assets/fonts/manrope-latin-500-normal.woff2) format('woff2')}
+  @font-face{font-family:'Manrope';font-weight:600;src:url(assets/fonts/manrope-latin-600-normal.woff2) format('woff2')}
+  @font-face{font-family:'Manrope';font-weight:700;src:url(assets/fonts/manrope-latin-700-normal.woff2) format('woff2')}
+  @font-face{font-family:'Manrope';font-weight:800;src:url(assets/fonts/manrope-latin-800-normal.woff2) format('woff2')}
+  :root{
+    --bg:#0b0716; --bg2:#130c24; --card:#171028; --line:rgba(255,255,255,.11);
+    --violet:#8b5cf6; --violet2:#c4b5fd; --fuchsia:#e879f9; --pink:#f472b6;
+    --amber:#fbbf24; --mint:#34d399; --sky:#38bdf8; --red:#fb7185;
+    --ink:#f7f4ff; --mute:#a79fc7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:'Manrope','Noto Color Emoji',sans-serif;color:var(--ink)}
+  .h{font-family:'Sora','Noto Color Emoji',sans-serif}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--bg)}
+  .abs{position:absolute}
+  .blob{position:absolute;left:0;top:0;border-radius:50%;filter:blur(130px)}
+  .gt{background:linear-gradient(95deg,#c4b5fd,#e879f9 60%,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .scene{position:absolute;inset:0;opacity:0}
+  .win{position:absolute;background:linear-gradient(170deg,#1a1230,#0f0a1d);border:2px solid var(--line);border-radius:36px;box-shadow:0 50px 140px rgba(0,0,0,.6),0 0 120px rgba(139,92,246,.25),inset 0 1px 0 rgba(255,255,255,.12);overflow:hidden}
+  .dots3{position:absolute;left:34px;top:26px;display:flex;gap:11px}
+  .dots3 i{width:17px;height:17px;border-radius:50%}
+  .side{position:absolute;left:0;top:0;bottom:0;width:270px;border-right:1.5px solid var(--line);background:rgba(255,255,255,.02);padding:84px 18px 0}
+  .nav{display:flex;align-items:center;gap:14px;height:56px;padding:0 16px;margin-bottom:6px;border-radius:16px;font-size:24px;font-weight:700;color:var(--mute);white-space:nowrap}
+  .nav.on{background:rgba(139,92,246,.22);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(139,92,246,.55)}
+  .field{position:absolute;height:104px;border-radius:22px;background:rgba(255,255,255,.06);border:2px solid var(--line);padding:14px 26px}
+  .field small{display:block;font-size:20px;font-weight:700;letter-spacing:2px;color:var(--mute);text-transform:uppercase}
+  .field b{display:block;margin-top:2px;font-size:34px;font-weight:800;white-space:nowrap}
+  .btn{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;border-radius:24px;background:linear-gradient(95deg,#7c3aed,#c026d3);font-weight:800;color:#fff;box-shadow:0 18px 60px rgba(168,85,247,.55),inset 0 1px 0 rgba(255,255,255,.3);white-space:nowrap}
+  .row{position:absolute;left:0;height:82px;border-radius:20px;background:rgba(255,255,255,.055);border:1.5px solid rgba(255,255,255,.09);font-size:27px;font-weight:700}
+  .row span{position:absolute;top:0;line-height:80px;white-space:nowrap}
+  .pill{display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:40px;font-weight:800;white-space:nowrap}
+  .sticker{position:absolute;padding:14px 34px 18px;border-radius:34px;font-family:'Sora';font-weight:800;white-space:nowrap;box-shadow:0 24px 70px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.35)}
+  .col{position:absolute;top:96px;width:300px;height:640px;border-radius:26px;background:rgba(255,255,255,.04);border:1.5px solid var(--line)}
+  .col .hd{position:absolute;left:22px;top:18px;font-size:23px;font-weight:800;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .col .hd i{width:14px;height:14px;border-radius:50%}
+  .deal{position:absolute;left:16px;width:268px;height:128px;border-radius:20px;background:#221838;border:1.5px solid rgba(255,255,255,.14);padding:16px 18px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+  .deal b{display:block;font-size:21px;font-weight:800;white-space:nowrap}
+  .deal span{display:block;margin-top:5px;font-size:17px;font-weight:600;color:var(--mute);white-space:nowrap}
+  .tile{position:absolute;width:560px;height:210px;border-radius:34px;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.04));border:2px solid var(--line);padding:30px 34px;box-shadow:0 30px 90px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15)}
+  .tile .ic{width:84px;height:84px;border-radius:26px;display:flex;align-items:center;justify-content:center;font-size:48px}
+  .tile h4{position:absolute;left:142px;top:34px;font-family:'Sora';font-size:32px;font-weight:800;letter-spacing:-.5px;white-space:nowrap}
+  .tile p{position:absolute;left:142px;top:86px;right:20px;font-size:24px;font-weight:600;color:var(--mute);line-height:1.25}
+  .plan{position:absolute;width:480px;height:470px;border-radius:38px;background:linear-gradient(165deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:2px solid var(--line);box-shadow:0 40px 110px rgba(0,0,0,.5);text-align:center}
+  .plan.max{border-color:#c084fc;box-shadow:0 40px 130px rgba(168,85,247,.5)}
+  #sub{position:absolute;left:0;right:0;bottom:44px;text-align:center;font-family:'Sora';font-size:54px;font-weight:800;letter-spacing:-.5px;opacity:0}
+  #sub .p{display:inline-block;padding:12px 40px 16px;border-radius:30px;background:rgba(9,5,20,.8);border:1.5px solid rgba(255,255,255,.14)}
+  #sub .w{color:rgba(255,255,255,.42)} #sub .w.on{color:#fff}
+  .conf{position:absolute;left:0;top:0;width:18px;height:26px;border-radius:4px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg" class="abs" style="inset:0">
+    <div class="blob" id="b1" style="width:1000px;height:1000px;background:#7c3aed;opacity:.5"></div>
+    <div class="blob" id="b2" style="width:850px;height:850px;background:#c026d3;opacity:.32"></div>
+    <div class="blob" id="b3" style="width:800px;height:800px;background:#4f46e5;opacity:.35"></div>
+    <svg class="abs" style="inset:0" width="1920" height="1080" id="dots"></svg>
+    <div id="parts"></div>
+  </div>
+
+  <!-- ========== CENA 1 · GANCHO ========== -->
+  <div class="scene" id="s1">
+    <svg class="abs" style="inset:0" width="1920" height="1080" id="darkmap"></svg>
+    <div id="qpins"></div>
+    <div class="abs h" id="darkTxt" style="left:0;right:0;top:140px;text-align:center;font-size:104px;font-weight:800;letter-spacing:-3px;color:#cfc8ee;white-space:nowrap">Prospectando no <span id="escuro" style="color:#6b6590">escuro</span>? <span style="display:inline-block" id="moon">🌑</span></div>
+    <div class="abs" id="rays" style="left:960px;top:610px;width:0;height:0"></div>
+    <div class="abs" id="halo" style="left:960px;top:610px;width:840px;height:840px;margin:-420px;border-radius:50%;background:radial-gradient(circle,#fff 0,#fff 56%,rgba(233,213,255,.9) 66%,rgba(168,85,247,0) 76%);opacity:0"></div>
+    <img class="abs" id="logo" src="assets/lumora-logo.png" style="left:960px;top:610px;width:540px;margin:-176px 0 0 -270px">
+    <div class="abs h" id="lightTxt" style="left:0;right:0;top:40px;text-align:center;font-size:112px;font-weight:800;letter-spacing:-4px;opacity:0;white-space:nowrap">Acende a <span class="gt">luz!</span> 💡</div>
+  </div>
+
+  <!-- ========== CENAS 2-4 · APP ========== -->
+  <div class="win" id="win" style="left:130px;top:70px;width:1660px;height:830px;opacity:0">
+    <div class="dots3"><i style="background:#fb7185"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i></div>
+    <div class="abs" style="left:0;right:0;top:20px;text-align:center;font-size:24px;font-weight:700;color:var(--mute)" id="wtitle">Lumora · Buscar Leads</div>
+    <div class="side" id="side">
+      <div class="nav"><span>📊</span>Dashboard</div>
+      <div class="nav"><span>🤖</span>IA Lumora</div>
+      <div class="nav on" id="nvB"><span>🔎</span>Buscar Leads</div>
+      <div class="nav" id="nvL"><span>👥</span>Meus Leads</div>
+      <div class="nav" id="nvLib"><span>📚</span>Biblioteca</div>
+      <div class="nav" id="nvC"><span>🗂️</span>CRM</div>
+      <div class="nav"><span>🕘</span>Histórico</div>
+    </div>
+
+    <!-- A · formulário -->
+    <div id="form" class="abs" style="left:270px;top:0;right:0;bottom:0">
+      <div class="abs h" style="left:60px;top:84px;font-size:44px;font-weight:800;letter-spacing:-1px">Buscar Leads</div>
+      <div class="field" id="fPais" style="left:60px;top:170px;width:520px"><small>País</small><b id="paisV">🇧🇷 Brasil</b></div>
+      <div class="field" id="fEst" style="left:610px;top:170px;width:260px"><small>Estado</small><b id="estV"></b></div>
+      <div class="field" id="fCid" style="left:900px;top:170px;width:480px"><small>Cidade</small><b><span id="cidV"></span><span id="cidCaret" style="display:inline-block;width:4px;height:34px;background:var(--fuchsia);margin-left:3px;vertical-align:-5px"></span></b></div>
+      <div class="field" id="fNic" style="left:60px;top:300px;width:820px;overflow:hidden"><small>Nicho</small><div id="nicWrap" class="abs" style="left:26px;top:46px;width:760px;height:44px;overflow:hidden"><div id="nicRoll"></div></div></div>
+      <div class="field" id="fQtd" style="left:910px;top:300px;width:470px"><small>Quantidade</small><b>Até 60 resultados</b></div>
+      <div class="abs" id="cost" style="left:60px;top:440px;width:820px;height:74px;border-radius:20px;border:2px solid rgba(139,92,246,.4);background:rgba(139,92,246,.1);padding:0 26px;display:flex;align-items:center;justify-content:space-between;font-size:26px;font-weight:700"><span style="color:var(--mute)">🪙 Custo da pesquisa</span><span id="costV">30 créditos</span></div>
+      <div class="abs" id="mq" style="left:0;right:0;top:580px;height:200px;overflow:hidden;opacity:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)"><div id="mq1" class="abs" style="left:0;top:0;white-space:nowrap"></div><div id="mq2" class="abs" style="left:0;top:96px;white-space:nowrap"></div></div>
+      <div class="btn h" id="goBtn" style="left:910px;top:430px;width:470px;height:96px;font-size:38px">🔎 Buscar leads</div>
+      <div class="abs" id="creditPop" style="left:1100px;top:392px;font-size:40px;font-weight:800;color:var(--fuchsia);opacity:0">−30 🪙</div>
+    </div>
+
+    <!-- B · resultados -->
+    <div id="results" class="abs" style="left:270px;top:0;right:0;bottom:0;opacity:0">
+      <div class="abs" id="mini" style="left:40px;top:76px;width:1330px;height:76px;border-radius:22px;background:rgba(255,255,255,.06);border:2px solid var(--line);padding:0 26px;display:flex;align-items:center;gap:28px;font-size:25px;font-weight:700">
+        <span>🇧🇷 MG</span><span style="color:var(--mute)">·</span><span>Belo Horizonte</span><span style="color:var(--mute)">·</span><span>Clínica odontológica</span>
+        <span class="pill" style="margin-left:auto;background:rgba(52,211,153,.16);border:2px solid var(--mint);color:var(--mint);font-size:24px">✅ <span id="cnt">0</span> leads</span>
+      </div>
+      <div class="abs" style="left:40px;top:176px;width:1330px;height:34px;font-size:19px;font-weight:800;color:var(--mute);letter-spacing:2px">
+        <span class="abs" style="left:30px">EMPRESA</span><span class="abs" style="left:520px">TELEFONE</span><span class="abs" style="left:800px">WHATSAPP</span><span class="abs" style="left:1010px">SITE</span><span class="abs" style="left:1170px">NOTA</span>
+      </div>
+      <div class="abs" id="rows" style="left:40px;top:216px;width:1330px;height:520px"></div>
+      <div class="abs" id="scis" style="left:0;top:0;font-size:64px;opacity:0;z-index:5">✂️</div>
+      <div class="abs" id="filterBar" style="left:40px;top:690px;width:1330px;height:76px;opacity:0">
+        <div class="pill" id="fSite" style="position:absolute;left:0;top:0;height:76px;padding:0 28px;font-size:26px;background:rgba(255,255,255,.08);border:2px solid var(--line)"><span id="tgl" style="display:inline-block;width:64px;height:34px;border-radius:20px;background:#4a3f6b;position:relative"><i id="tglK" style="position:absolute;left:4px;top:4px;width:26px;height:26px;border-radius:50%;background:#fff"></i></span>🌐 Só empresas sem site</div>
+        <div class="btn h" id="csvBtn" style="position:absolute;right:0;top:0;width:420px;height:76px;font-size:29px">📥 Exportar CSV</div>
+      </div>
+    </div>
+  </div>
+  <div class="abs" id="csvFile" style="left:0;top:0;width:260px;height:300px;opacity:0">
+    <div class="abs" style="left:0;top:0;width:230px;height:290px;border-radius:26px;background:linear-gradient(165deg,#34d399,#059669);box-shadow:0 30px 80px rgba(5,150,105,.55),inset 0 3px 0 rgba(255,255,255,.4)"></div>
+    <div class="abs h" style="left:0;top:92px;width:230px;text-align:center;font-size:62px;font-weight:800;color:#052e22">.CSV</div>
+    <div class="abs" style="left:0;top:178px;width:230px;text-align:center;font-size:25px;font-weight:800;color:#052e22">sem duplicados ✓</div>
+    <div class="abs" style="left:22px;top:20px;font-size:44px">📄</div>
+  </div>
+
+  <!-- stickers das cenas 2-4 -->
+  <div class="sticker" id="stk150" style="left:1180px;top:14px;font-size:70px;background:linear-gradient(120deg,#f59e0b,#f43f5e);color:#fff;opacity:0">150+ nichos 🎯</div>
+  <div class="sticker" id="stkDup" style="left:1290px;top:8px;font-size:50px;background:linear-gradient(120deg,#34d399,#06b6d4);color:#032a1f;opacity:0">✂️ Sem duplicados!</div>
+  <div class="sticker" id="stkEUA" style="left:80px;top:40px;font-size:54px;background:linear-gradient(120deg,#38bdf8,#6366f1);color:#fff;opacity:0">🇧🇷 Brasil + 🇺🇸 EUA</div>
+
+  <!-- ========== CENA 5 · BIBLIOTECA ========== -->
+  <div class="scene" id="s5">
+    <div class="win" id="lib" style="left:130px;top:70px;width:1660px;height:830px">
+      <div class="dots3"><i style="background:#fb7185"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i></div>
+      <div class="abs" style="left:0;right:0;top:20px;text-align:center;font-size:24px;font-weight:700;color:var(--mute)">Lumora · Biblioteca de mensagens</div>
+      <div class="abs h" style="left:60px;top:84px;font-size:42px;font-weight:800;letter-spacing:-1px">Finalidade de uso</div>
+      <div id="chips"></div>
+      <div class="abs" id="msg" style="left:760px;top:96px;width:830px;height:690px;border-radius:30px;background:rgba(255,255,255,.05);border:2px solid var(--line);padding:30px 36px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <span class="pill" id="tabM" style="background:rgba(139,92,246,.3);border:2px solid var(--violet);font-size:24px">💬 Mensagem</span>
+          <span class="pill" style="background:rgba(255,255,255,.06);border:2px solid var(--line);font-size:24px;color:var(--mute)">🌐 Prompt do site</span>
+          <span class="pill" id="langP" style="margin-left:auto;background:rgba(56,189,248,.16);border:2px solid var(--sky);font-size:24px">🇧🇷 PT</span>
+        </div>
+        <div class="abs" id="msgBody" style="left:36px;top:116px;width:760px;font-size:35px;font-weight:600;line-height:1.5"></div>
+        <div class="abs" style="left:36px;top:392px;font-size:24px;font-weight:800;color:var(--mute);letter-spacing:1px">CAMPOS PREENCHIDOS COM OS DADOS DO LEAD</div>
+        <div class="abs" id="phWrap" style="left:36px;top:436px;width:770px;display:flex;flex-wrap:wrap;gap:12px"></div>
+        <div class="btn h" id="copyBtn" style="left:36px;top:590px;width:360px;height:76px;font-size:30px;position:absolute">📋 Copiar</div>
+        <div class="abs" id="nichosTag" style="right:36px;top:600px;font-size:26px;font-weight:800;color:var(--amber);white-space:nowrap">⚡ sem gastar créditos</div>
+      </div>
+    </div>
+  </div>
+  <div class="sticker" id="stkLib" style="left:1260px;top:6px;font-size:52px;background:linear-gradient(120deg,#a855f7,#ec4899);color:#fff;opacity:0">Pronta pra enviar! 🚀</div>
+
+  <!-- ========== CENA 6 · CRM ========== -->
+  <div class="scene" id="s6">
+    <div class="win" id="crm" style="left:130px;top:70px;width:1660px;height:830px">
+      <div class="dots3"><i style="background:#fb7185"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i></div>
+      <div class="abs" style="left:0;right:0;top:20px;text-align:center;font-size:24px;font-weight:700;color:var(--mute)">Lumora · CRM Kanban</div>
+      <div id="cols" class="abs" style="left:34px;top:30px;right:0;bottom:0"></div>
+    </div>
+    <div class="abs" id="cursor" style="left:0;top:0;width:64px;height:64px;z-index:20"><svg viewBox="0 0 24 24" width="64" height="64"><path d="M4 2 L4 19 L8.6 14.9 L11.7 21.8 L14.4 20.6 L11.4 13.8 L17.6 13.5Z" fill="#fff" stroke="#1b1033" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+    <div class="sticker" id="stkWon" style="left:1180px;top:6px;font-size:62px;background:linear-gradient(120deg,#34d399,#a3e635);color:#06301f;opacity:0">Fechou! 🎉</div>
+    <div class="sticker" id="stkUltra" style="left:150px;top:16px;font-size:44px;background:linear-gradient(120deg,#fbbf24,#f97316);color:#3b1d00;opacity:0">👑 CRM no plano Ultra</div>
+  </div>
+
+  <!-- ========== CENA 7 · E MAIS ========== -->
+  <div class="scene" id="s7">
+    <div class="abs h" id="maisH" style="left:0;right:0;top:56px;text-align:center;font-size:84px;font-weight:800;letter-spacing:-3px;white-space:nowrap">Tem <span class="gt">muito mais</span> aí dentro ✨</div>
+    <div id="tiles"></div>
+  </div>
+
+  <!-- ========== CENA 8 · CTA ========== -->
+  <div class="scene" id="s8">
+    <div class="abs h" id="planH" style="left:0;right:0;top:56px;text-align:center;font-size:84px;font-weight:800;letter-spacing:-3px;white-space:nowrap">Escolha seu <span class="gt">plano</span></div>
+    <div class="plan" id="pPro" style="left:200px;top:240px">
+      <div class="abs h" style="left:0;right:0;top:36px;font-size:54px;font-weight:800">Pro</div>
+      <div class="abs h" style="left:0;right:0;top:128px;font-size:30px;font-weight:700;color:var(--mute)">R$</div>
+      <div class="abs h" style="left:0;right:0;top:150px;font-size:112px;font-weight:800;letter-spacing:-5px">79<span style="font-size:60px">,90</span></div>
+      <div class="abs" style="left:0;right:0;top:284px;font-size:26px;font-weight:700;color:var(--mute)">por mês</div>
+      <div class="abs" style="left:0;right:0;top:342px;font-size:30px;font-weight:800">🪙 1.000 créditos</div>
+      <div class="abs" style="left:0;right:0;top:394px;font-size:24px;font-weight:600;color:var(--mute)">Busca BR + EUA · Biblioteca · CSV</div>
+    </div>
+    <div class="plan max" id="pMax" style="left:720px;top:210px;height:530px">
+      <div class="abs h" style="left:50%;top:-30px;margin-left:-130px;width:260px;text-align:center;padding:8px 0 12px;border-radius:30px;background:linear-gradient(95deg,#7c3aed,#c026d3);font-size:26px;font-weight:800">⭐ Mais escolhido</div>
+      <div class="abs h" style="left:0;right:0;top:56px;font-size:58px;font-weight:800">Max</div>
+      <div class="abs h" style="left:0;right:0;top:150px;font-size:30px;font-weight:700;color:var(--mute)">R$</div>
+      <div class="abs h" style="left:0;right:0;top:172px;font-size:120px;font-weight:800;letter-spacing:-5px">169<span style="font-size:60px">,90</span></div>
+      <div class="abs" style="left:0;right:0;top:312px;font-size:26px;font-weight:700;color:var(--mute)">por mês</div>
+      <div class="abs" style="left:0;right:0;top:372px;font-size:30px;font-weight:800">🪙 3.000 créditos</div>
+      <div class="abs" style="left:0;right:0;top:426px;font-size:24px;font-weight:600;color:var(--mute)">Tudo do Pro · filtros avançados · suporte prioritário</div>
+    </div>
+    <div class="plan" id="pUltra" style="left:1240px;top:240px">
+      <div class="abs h" style="left:0;right:0;top:36px;font-size:54px;font-weight:800">Ultra</div>
+      <div class="abs h" style="left:0;right:0;top:128px;font-size:30px;font-weight:700;color:var(--mute)">R$</div>
+      <div class="abs h" style="left:0;right:0;top:150px;font-size:112px;font-weight:800;letter-spacing:-5px">299<span style="font-size:60px">,90</span></div>
+      <div class="abs" style="left:0;right:0;top:284px;font-size:26px;font-weight:700;color:var(--mute)">por mês</div>
+      <div class="abs" style="left:0;right:0;top:342px;font-size:30px;font-weight:800">🪙 5.000 créditos</div>
+      <div class="abs" style="left:0;right:0;top:394px;font-size:24px;font-weight:600;color:var(--mute)">Tudo do Max · 👑 CRM com Kanban</div>
+    </div>
+  </div>
+
+  <div id="finale" class="abs" style="inset:0;opacity:0">
+    <div class="abs" id="ring1" style="left:960px;top:277px;width:300px;height:300px;margin:-150px;border-radius:50%;border:5px solid var(--violet2);opacity:0"></div>
+    <div class="abs" id="ring2" style="left:960px;top:277px;width:300px;height:300px;margin:-150px;border-radius:50%;border:5px solid var(--fuchsia);opacity:0"></div>
+    <div class="abs" id="haloF" style="left:960px;top:277px;width:620px;height:390px;margin:-195px -310px;border-radius:96px;background:#fff;box-shadow:0 0 140px 50px rgba(216,180,254,.55),0 30px 90px rgba(0,0,0,.4);opacity:0"></div>
+    <img class="abs" id="logoF" src="assets/lumora-logo.png" style="left:960px;top:277px;width:420px;margin:-137px 0 0 -210px">
+    <div class="abs h" id="ctaH" style="left:0;right:0;top:520px;text-align:center;font-size:102px;font-weight:800;letter-spacing:-4px;white-space:nowrap">Acenda suas <span class="gt">vendas</span> 🔥</div>
+    <div class="btn h" id="ctaBtn" style="left:560px;top:690px;width:800px;height:140px;font-size:64px;border-radius:40px">Assinar agora →</div>
+    <div class="abs" id="ctaSub" style="left:0;right:0;top:858px;text-align:center;font-size:34px;font-weight:700;color:var(--mute)">Planos a partir de <span style="color:#fff;font-weight:800">R$ 79,90/mês</span></div>
+    <div class="abs" id="cursor2" style="left:0;top:0;width:76px;height:76px;z-index:20"><svg viewBox="0 0 24 24" width="76" height="76"><path d="M4 2 L4 19 L8.6 14.9 L11.7 21.8 L14.4 20.6 L11.4 13.8 L17.6 13.5Z" fill="#fff" stroke="#1b1033" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  </div>
+
+  <div id="confetti"></div>
+  <div class="abs" id="swipe" style="left:0;top:-200px;width:900px;height:1480px;background:linear-gradient(100deg,#7c3aed,#c026d3 60%,#f472b6);transform:translateX(-1200px) skewX(-14deg);opacity:0"></div>
+  <div id="sub"></div>
+  <div class="abs" id="flash" style="inset:0;background:#fff;opacity:0;pointer-events:none"></div>
+  <div class="abs" style="inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 58%,rgba(0,0,0,.5) 100%)"></div>
+</div>
+
+<script>
+const W=1920,H=1080;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const eo3=x=>1-Math.pow(1-x,3), eo4=x=>1-Math.pow(1-x,4), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eob=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const eoe=x=>x===0?0:x===1?1:Math.pow(2,-10*x)*Math.sin((x*10-.75)*(2*Math.PI)/3)+1; // elastic
+let seed=11; const rnd=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296};
+const $=id=>document.getElementById(id);
+const px=(el,t,a,dur=.5,from=0.5)=>{const k=eob(seg(t,a,a+dur));el.style.opacity=clamp(k*2.2);el.style.transform=`scale(${from+(1-from)*k})`;return k};
+const bump=(t,a,amp=.1,d=.35)=>{const k=seg(t,a,a+d);return 1+Math.sin(k*Math.PI)*amp*(1-k)}; // "pulinho"
+
+/* ---------- Narração: início medido (s) e duração da fala (s) ---------- */
+const NARR=[
+ {t:.25, d:2.74, text:'Cansou de prospectar no escuro?|Acende a luz: Lumora!'},
+ {t:3.23,d:3.49, text:'Escolha país, cidade e nicho.|Mais de cento e cinquenta prontos!'},
+ {t:6.94,d:3.97, text:'Buscou? Pronto!|Empresas reais, com telefone, site e nota.|Sem duplicados!'},
+ {t:11.14,d:3.37, text:'Só quem não tem site? Filtra!|E exporta em CSV num clique.'},
+ {t:14.74,d:3.22, text:'A mensagem de venda já vem prontinha,|em português ou inglês!'},
+ {t:18.19,d:2.38, text:'Aí é só arrastar no CRM|até fechar negócio!'},
+ {t:20.83,d:3.31, text:'Histórico, créditos transparentes,|indique e ganhe... e muito mais!'},
+ {t:24.39,d:4.52, text:'Planos a partir de setenta e nove e noventa.|Assine o Lumora e acenda suas vendas!'}
+];
+const CHUNKS=[];
+NARR.forEach(n=>{
+  const parts=n.text.split('|'), tot=parts.reduce((s,p)=>s+p.length+4,0);
+  let c=n.t;
+  parts.forEach(p=>{const dd=n.d*(p.length+4)/tot; CHUNKS.push({t0:c,t1:c+dd,text:p.replace('...','…')}); c+=dd});
+});
+function subtitle(t){
+  const el=$('sub'), c=CHUNKS.find(c=>t>=c.t0-.02&&t<c.t1+.12);
+  if(!c||t>29.2){el.style.opacity=0;return}
+  const words=c.text.split(' '), p=clamp((t-c.t0)/(c.t1-c.t0)), a=seg(t,c.t0,c.t0+.12);
+  el.style.opacity=a;el.style.transform=`translateY(${(1-eo3(a))*20}px)`;
+  const key=c.text+Math.round(p*words.length);
+  if(el._k!==key){el._k=key;el.innerHTML='<span class="p">'+words.map((w,i)=>`<span class="w ${i/words.length<=p+.001?'on':''}">${w}</span>`).join(' ')+'</span>'}
+}
+
+/* ---------- fundo ---------- */
+(function(){
+  let s='';for(let x=60;x<W;x+=80)for(let y=60;y<H;y+=80)s+=`<circle cx="${x}" cy="${y}" r="2" fill="rgba(255,255,255,.07)"/>`;
+  $('dots').innerHTML=s;
+  let h='';for(let i=0;i<44;i++){const sz=3+rnd()*7;h+=`<i class="abs" style="left:0;top:0;width:${sz}px;height:${sz}px;border-radius:50%;background:${['#c4b5fd','#e879f9','#a78bfa'][i%3]};opacity:${.2+rnd()*.5}"></i>`}
+  $('parts').innerHTML=h;
+})();
+const parts=[...$('parts').children].map(el=>({el,x:rnd()*W,y:rnd()*H,sp:20+rnd()*60,ph:rnd()*6.28}));
+
+/* ---------- cena 1: mapa escuro com leads escondidos ---------- */
+const qp=[];
+(function(){
+  seed=5;
+  let m='<defs><radialGradient id="mg" cx=".5" cy=".5" r=".75"><stop offset="0" stop-color="#1a1230"/><stop offset="1" stop-color="#05030c"/></radialGradient></defs><rect width="1920" height="1080" fill="url(#mg)"/>';
+  for(let i=0;i<10;i++){const y=rnd()*1080;m+=`<path d="M-50 ${y} Q ${400+rnd()*400} ${y+(rnd()-.5)*300} ${1000+rnd()*400} ${y+(rnd()-.5)*300} T 2000 ${y+(rnd()-.5)*400}" stroke="rgba(255,255,255,.05)" stroke-width="${3+rnd()*5}" fill="none"/>`}
+  for(let i=0;i<10;i++){const x=rnd()*1920;m+=`<path d="M${x} -50 Q ${x+(rnd()-.5)*400} 400 ${x+(rnd()-.5)*300} 700 T ${x+(rnd()-.5)*400} 1150" stroke="rgba(255,255,255,.05)" stroke-width="${3+rnd()*5}" fill="none"/>`}
+  $('darkmap').innerHTML=m;
+  let h='';
+  for(let i=0;i<34;i++){let x,y;do{x=80+rnd()*1760;y=300+rnd()*700}while(Math.abs(x-960)<560&&y<1000);
+    qp.push({x,y,d:1.55+rnd()*.5,c:['#f472b6','#c084fc','#e879f9','#a78bfa'][i%4]});
+    h+=`<div class="abs" id="qp${i}" style="left:${x}px;top:${y}px;width:46px;height:46px;margin:-23px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Sora;font-weight:800;font-size:26px;color:#6b6590;border:3px solid #3a3358"></div>`}
+  $('qpins').innerHTML=h;
+  let r='';for(let i=0;i<18;i++)r+=`<div class="abs" id="ry${i}" style="left:0;top:-9px;width:1500px;height:18px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(232,121,249,.85),transparent);border-radius:9px"></div>`;
+  $('rays').innerHTML=r;
+})();
+
+/* ---------- cena 2: nichos (slot machine) ---------- */
+const NICHES=['Restaurantes','Academias','Pet shops','Advocacia','Imobiliárias','Salões de beleza','Oficinas','Contabilidade','Escolas','Clínica odontológica'];
+$('nicRoll').innerHTML=NICHES.map(n=>`<div style="height:44px;font-size:34px;font-weight:800;line-height:44px;white-space:nowrap">${n}</div>`).join('');
+
+const MQ=['🦷 Clínicas','🍽️ Restaurantes','💪 Academias','🏠 Imobiliárias','⚖️ Advocacia','💇 Salões de beleza','🐾 Pet shops','🔧 Oficinas','📊 Contabilidade','🎓 Escolas','👗 Lojas de roupas','🏗️ Construtoras','🚗 Auto peças','🧘 Estúdios de pilates','🍰 Confeitarias','📸 Fotógrafos'];
+(function(){const chip=(n,i)=>`<span class="pill" style="margin-right:18px;height:76px;padding:0 30px;font-size:32px;background:rgba(255,255,255,.07);border:2px solid ${['#a78bfa','#e879f9','#38bdf8','#fbbf24'][i%4]}66">${n}</span>`;
+  $('mq1').innerHTML=[...MQ,...MQ,...MQ].map(chip).join('');$('mq2').innerHTML=[...MQ.slice().reverse(),...MQ,...MQ].map(chip).join('')})();
+/* ---------- cena 3: linhas de resultados ---------- */
+const leads=[
+ ['Clínica odontológica','(31) 9••••-••••',1,'4,9'],
+ ['Clínica odontológica','(31) 3•••-••••',0,'4,7'],
+ ['Clínica odontológica','(31) 9••••-••••',1,'4,8'],
+ ['Clínica odontológica','(31) 9••••-••••',1,'4,8'],   // duplicado da linha 3
+ ['Clínica odontológica','(31) 3•••-••••',0,'4,6'],
+ ['Clínica odontológica','(31) 9••••-••••',1,'5,0']
+];
+(function(){
+  let h='';
+  leads.forEach((l,i)=>{h+=`<div class="row" id="rw${i}" style="top:${i*92}px;opacity:0">
+   <span style="left:30px;width:480px;overflow:hidden">🦷 ${l[0]} <span style="position:static;color:var(--mute);font-size:21px;font-weight:600">· BH</span></span>
+   <span style="left:520px;color:var(--sky)">${l[1]}</span>
+   <span style="left:800px;font-size:30px">${l[1].indexOf('9')===5?'💬 ✓':'—'}</span>
+   <span style="left:1010px;font-size:27px;color:${l[2]?'var(--mint)':'var(--red)'}">${l[2]?'🌐 tem site':'🚫 sem site'}</span>
+   <span style="left:1170px;color:var(--amber)">★ ${l[3]}</span>
+   <span id="dupTag" style="display:none"></span></div>`});
+  $('rows').innerHTML=h;
+})();
+
+/* ---------- cena 5: biblioteca ---------- */
+const CHIPS=[['🌐','Venda de sites'],['📡','Planos de internet'],['📣','Marketing'],['📱','Social media'],['🧭','Consultoria'],['🛠️','Prestação de serviços'],['💼','Vendas e comercial']];
+(function(){
+  let h='';CHIPS.forEach((c,i)=>{h+=`<div class="abs" id="ch${i}" style="left:60px;top:${150+i*86}px;width:640px;height:72px;border-radius:20px;background:rgba(255,255,255,.05);border:2px solid var(--line);padding:0 24px;display:flex;align-items:center;gap:16px;font-size:29px;font-weight:700;white-space:nowrap"><span style="font-size:34px">${c[0]}</span>${c[1]}<span id="chk${i}" style="margin-left:auto;opacity:0">✅</span></div>`});
+  $('chips').innerHTML=h;
+})();
+const PH_PT=['NOME DA EMPRESA','CIDADE','NICHO'], PH_EN=['BUSINESS NAME','CITY','NICHE'];
+function msgHTML(t){
+  // texto com campos [..] que se preenchem com os dados do lead e viram inglês
+  const f=eo3(seg(t,15.9,16.5)), en=t>=17.0;
+  const val=(ph,v)=>f<.5?`<span style="background:rgba(251,191,36,.2);border:2px dashed var(--amber);border-radius:10px;padding:0 10px;color:var(--amber);font-size:27px;font-weight:800">[${ph}]</span>`:`<span style="background:rgba(52,211,153,.18);border-radius:10px;padding:0 10px;color:#6ee7b7;font-weight:800">${v}</span>`;
+  if(!en) return `Olá! Vi que a ${val('NOME DA EMPRESA','Clínica Exemplo')}, em ${val('CIDADE','Belo Horizonte')}, ainda não tem site. Posso te mostrar como atrair mais pacientes? 😊`;
+  return `Hi! I noticed ${val('BUSINESS NAME','Example Dental')} in ${val('CITY','Austin')} doesn’t have a website yet. Can I show you how to win more patients? 😊`;
+}
+
+/* ---------- cena 6: CRM ---------- */
+const STG=[['Novo','#8b5cf6'],['Contato iniciado','#38bdf8'],['Em negociação','#fbbf24'],['Proposta enviada','#e879f9'],['Cliente','#34d399']];
+const deals0=[['Clínica odontológica','Belo Horizonte · MG'],['Academia','Recife · PE'],['Imobiliária','Campinas · SP']];
+(function(){
+  let h='';
+  STG.forEach((s,i)=>{h+=`<div class="col" id="cl${i}" style="left:${i*314}px"><div class="hd"><i style="background:${s[1]}"></i>${s[0]}</div></div>`});
+  // cards parados
+  const still=[[0,1,'Academia','Recife · PE'],[0,2,'Imobiliária','Campinas · SP'],[1,0,'Clínica veterinária','Curitiba · PR'],[2,0,'Salão de beleza','Salvador · BA'],[3,0,'Escritório de advocacia','Brasília · DF'],[1,1,'Padaria','Fortaleza · CE'],[2,1,'Pet shop','Manaus · AM'],[3,1,'Escola de idiomas','Porto Alegre · RS']];
+  still.forEach(([c,r,a,b],i)=>{h+=`<div class="deal" id="sd${i}" style="left:${c*314+16}px;top:${146+r*140}px;opacity:0"><b>${a}</b><span>📍 ${b}</span><span>✓ 2 tarefas · 💬 WhatsApp</span></div>`});
+  h+=`<div class="deal" id="hd" style="left:16px;top:146px;border-color:var(--fuchsia);box-shadow:0 24px 60px rgba(232,121,249,.45);z-index:10;opacity:0"><b>Clínica odontológica</b><span>📍 Belo Horizonte · MG</span><span id="hdv" style="color:var(--mint);font-weight:800">✓ 2 tarefas</span></div>`;
+  $('cols').innerHTML=h;
+})();
+
+/* ---------- cena 7: tiles ---------- */
+const TILES=[
+ ['🕘','rgba(56,189,248,.22)','Histórico','Todas as pesquisas e leads salvos',20.9],
+ ['🪙','rgba(251,191,36,.22)','Créditos transparentes','30 por busca · estorno automático',21.75],
+ ['🎁','rgba(244,114,182,.24)','Indique e ganhe','+300 créditos por indicação',22.65],
+ ['🇺🇸','rgba(99,102,241,.28)','Brasil + EUA','Mensagens em português e inglês',23.25],
+ ['🔒','rgba(52,211,153,.22)','Dados só seus','Cada conta acessa só o que é dela',23.6],
+ ['🤖','rgba(168,85,247,.3)','IA Lumora','Em breve — vem coisa boa por aí',23.95]
+];
+(function(){
+  let h='';TILES.forEach((t,i)=>{const c=i%2,r=Math.floor(i/2);h+=`<div class="tile" id="tl${i}" style="left:${370+c*620}px;top:${200+r*236}px;opacity:0"><div class="ic" style="background:${t[1]}">${t[0]}</div><h4>${t[2]}</h4><p>${t[3]}</p></div>`});
+  $('tiles').innerHTML=h;
+})();
+
+/* ---------- confete ---------- */
+const CF=[];
+(function(){
+  seed=77;let h='';const cols=['#8b5cf6','#e879f9','#fbbf24','#34d399','#38bdf8','#f472b6'];
+  for(let i=0;i<90;i++){CF.push({vx:(rnd()-.5)*1300,vy:-500-rnd()*900,sp:rnd()*14-7,c:cols[i%6]});h+=`<i class="conf" id="cf${i}" style="background:${cols[i%6]};opacity:0"></i>`}
+  $('confetti').innerHTML=h;
+})();
+function confetti(t,t0,x0,y0,idxs){
+  const k=t-t0;
+  idxs.forEach(i=>{const e=$('cf'+i),c=CF[i];
+    if(k<0||k>2.4){e.style.opacity=0;return}
+    e.style.opacity=clamp(1-(k-1.6)/.8);
+    e.style.transform=`translate(${x0+c.vx*k}px,${y0+c.vy*k+1700*k*k}px) rotate(${c.sp*k*60}deg)`;
+  });
+}
+
+/* ---------- visibilidade de cena ---------- */
+function vis(el,t,a,b,fin=.35,fout=.3){
+  const i=seg(t,a,a+fin), o=1-seg(t,b-fout,b), op=(t<a||t>b)?0:eio(i)*eio(o);
+  el.style.opacity=op; el.style.display=op<=0?'none':'block';
+  el.style.transform=`scale(${1+(1-eio(i))*.05-(1-eio(o))*.05})`;
+  return op;
+}
+
+function render(t){
+  /* fundo vivo */
+  $('b1').style.transform=`translate(${-150+Math.sin(t*.7)*260+300}px,${-250+Math.cos(t*.5)*160}px)`;
+  $('b2').style.transform=`translate(${1100+Math.cos(t*.6)*280}px,${350+Math.sin(t*.8)*180}px)`;
+  $('b3').style.transform=`translate(${600+Math.sin(t*.4)*400}px,${450+Math.cos(t*.9)*120}px)`;
+  parts.forEach(p=>{const y=((p.y-t*p.sp)%H+H)%H;p.el.style.transform=`translate(${p.x+Math.sin(t+p.ph)*30}px,${y}px)`});
+  const dark=1-seg(t,1.45,1.75); // fundo apagado na cena 1
+  $('bg').style.opacity=.12+.88*(1-dark*.9);
+
+  /* tremida de câmera nos "impactos" */
+  let sh=0;[[1.5,.9],[6.3,.35],[19.95,.8],[27.7,.6]].forEach(([a,m])=>{const k=seg(t,a,a+.4);if(k>0&&k<1)sh=Math.max(sh,(1-k)*m)});
+  $('stage').style.transform=`translate(${Math.sin(t*95)*14*sh}px,${Math.cos(t*83)*10*sh}px) rotate(${Math.sin(t*70)*.5*sh}deg)`;
+
+  /* swipes de transição */
+  const SW=[3.12,6.88,11.06,14.68,18.12,20.78,24.32];
+  let swx=-1400,swo=0;
+  SW.forEach(s=>{const k=seg(t,s-.22,s+.28);if(k>0&&k<1){swx=-1100+k*3300;swo=1}});
+  $('swipe').style.transform=`translateX(${swx}px) skewX(-14deg)`;$('swipe').style.opacity=swo;
+
+  /* ===== CENA 1 ===== */
+  vis($('s1'),t,0,3.3,.01,.3);
+  (function(){
+    // texto escuro
+    const o=1-seg(t,1.3,1.55);
+    $('darkTxt').style.opacity=seg(t,.05,.3)*o; $('darkTxt').style.transform=`translateY(${(1-eo3(seg(t,.05,.5)))*40}px) scale(${1+seg(t,1.2,1.55)*.15})`;
+    $('moon').style.transform=`rotate(${Math.sin(t*5)*12}deg)`;
+    $('escuro').style.opacity=.6+.4*Math.sin(t*14)*seg(t,.5,1.4);
+    // pontos "?" escondidos
+    qp.forEach((p,i)=>{
+      const e=$('qp'+i), on=seg(t,p.d,p.d+.35), vis0=seg(t,.15,.5)*(1-on*0);
+      e.style.opacity=vis0;
+      if(on<=0){e.textContent='?';e.style.transform=`scale(1)`;e.style.background='rgba(255,255,255,.03)';e.style.boxShadow='none';e.style.color='#6b6590';e.style.borderColor='#3a3358'}
+      else{const k=eob(on);e.textContent='';e.style.transform=`scale(${k*1.1})`;e.style.background=p.c;e.style.borderColor='#fff';e.style.boxShadow=`0 0 0 ${on*46}px ${p.c}22,0 0 40px ${p.c}`}
+    });
+    // flash + logo
+    const lk=eob(seg(t,1.5,2.2)), lg=$('logo');
+    lg.style.opacity=clamp(lk*3);lg.style.transform=`scale(${lk*(1+Math.sin(t*3)*.015)}) rotate(${(1-lk)*-25}deg)`;
+    
+    // raios
+    for(let i=0;i<18;i++){const e=$('ry'+i),k=seg(t,1.5,2.0),len=eo3(k);e.style.transform=`rotate(${i*20+t*18}deg) scaleX(${len})`;e.style.opacity=t<1.5?0:(1-seg(t,2.4,3.0))*.8}
+    $('halo').style.opacity=t<1.5?0:clamp(eo3(seg(t,1.5,2.0)))*(.97+Math.sin(t*5)*.03)*(1-seg(t,2.9,3.2));$('halo').style.transform=`scale(${.4+.6*eo3(seg(t,1.5,2.2))})`;
+    // "Acende a luz!"
+    const tk=eob(seg(t,1.62,2.1));
+    $('lightTxt').style.opacity=clamp(tk*2)*(1-seg(t,3.0,3.25));$('lightTxt').style.transform=`translateY(${(1-tk)*-80}px) scale(${.7+.3*tk})`;
+  })();
+
+  /* ===== CENAS 2-4: janela do app ===== */
+  const win=$('win');
+  (function(){
+    const op=vis(win,t,3.1,15.0,.45,.35);
+    const wk=eob(seg(t,3.15,3.75));
+    win.style.transform=`translateY(${(1-wk)*160}px) scale(${.9+.1*wk})`;
+    // --- A: formulário ---
+    const formO=1-seg(t,6.62,6.95);
+    $('form').style.opacity=formO;
+    // país (pula pra EUA e volta)
+    const usa=t>=4.0&&t<4.62;
+    $('paisV').textContent=usa?'🇺🇸 Estados Unidos':'🇧🇷 Brasil';
+    $('fPais').style.transform=`scale(${bump(t,3.95,.07,.3)*bump(t,4.58,.07,.3)})`;
+    $('fPais').style.borderColor=(t>3.9&&t<4.9)?'#c084fc':'';
+    // estado + cidade digitando
+    const e=seg(t,4.65,4.8); $('estV').textContent='MG'.slice(0,Math.ceil(e*2));
+    const ct=seg(t,4.85,5.5), CT='Belo Horizonte'; $('cidV').textContent=CT.slice(0,Math.floor(ct*CT.length));
+    $('cidCaret').style.opacity=(ct>0&&ct<1)||(Math.floor(t*3)%2===0&&t<5.6)?1:0;
+    $('fCid').style.borderColor=(t>4.8&&t<5.9)?'#c084fc':'';
+    // slot machine de nichos
+    const sp=seg(t,5.2,6.0), ni=eo4(sp)*(NICHES.length-1);
+    $('nicRoll').style.transform=`translateY(${-ni*44}px)`;
+    $('fNic').style.borderColor=(t>5.1&&t<6.2)?'#c084fc':'';
+    $('fNic').style.opacity=seg(t,4.9,5.2);
+    $('mq').style.opacity=seg(t,4.4,4.9)*(1-seg(t,6.5,6.8));$('mq1').style.transform=`translateX(${-(t-4)*260}px)`;$('mq2').style.transform=`translateX(${-3400+(t-4)*260}px)`;
+    // sticker 150+
+    const s1=eob(seg(t,5.05,5.6));
+    $('stk150').style.opacity=clamp(s1*2)*(1-seg(t,6.55,6.85));
+    $('stk150').style.transform=`rotate(${-5+Math.sin(t*5)*1.5}deg) scale(${.4+.6*s1})`;
+    // sticker EUA
+    const sE=eob(seg(t,4.0,4.5));
+    $('stkEUA').style.opacity=clamp(sE*2)*(1-seg(t,5.0,5.3));
+    $('stkEUA').style.transform=`rotate(${3}deg) scale(${.4+.6*sE})`;
+    // botão buscar
+    const press=seg(t,6.15,6.4), gb=$('goBtn');
+    gb.style.transform=`scale(${1-Math.sin(press*Math.PI)*.1})`;
+    gb.style.boxShadow=t>5.9?`0 0 ${50+Math.sin(t*9)*25}px rgba(232,121,249,.9)`:'';
+    const cp=seg(t,6.3,6.9); $('creditPop').style.opacity=cp>0?1-seg(t,6.6,6.9):0; $('creditPop').style.transform=`translateY(${-cp*60}px)`;
+    // --- B: resultados ---
+    const resO=seg(t,6.85,7.2); $('results').style.opacity=resO;
+    $('wtitle').textContent=t<6.9?'Lumora · Buscar Leads':(t<11.2?'Lumora · Resultados da busca':'Lumora · Meus Leads');
+    const nvB=$('nvB'),nvL=$('nvL');
+    nvB.className='nav'+(t<11.1?' on':'');nvL.className='nav'+(t>=11.1&&t<14.7?' on':'');
+    $('nvLib').className='nav';
+    // contador
+    $('cnt').textContent=Math.round(60*eo3(seg(t,7.1,9.6)));
+    leads.forEach((l,i)=>{
+      const st=7.2+i*.36, k=eo4(seg(t,st,st+.4)), r=$('rw'+i);
+      let x=(1-k)*200, op2=k, bg='rgba(255,255,255,.055)', sc=1, top=i*92;
+      // duplicado (linha 3 => idx 3): aparece colada na 2, brilha, "snip" e some
+      if(i===3){
+        const m=seg(t,8.95,9.35), gone=seg(t,9.35,9.65);
+        top=i*92-m*0;
+        bg=t>8.9&&t<9.4?'rgba(244,114,182,.3)':bg;
+        sc=1-eo3(gone)*.6; op2=k*(1-gone);
+        x+=gone*300;
+      }
+      // linhas 5 e 6 sobem quando a duplicada some
+      if(i>3){top=i*92-92*eio(seg(t,9.5,9.95))}
+      // filtro "sem site"
+      let fil=1; if(t>=12.0){const f=seg(t,12.0,12.5); if(l[2]) fil=1-.82*f; else {bg=`rgba(52,211,153,${.16*f+.055})`}}
+      r.style.opacity=op2*fil; r.style.transform=`translateX(${x}px) scale(${sc})`; r.style.top=top+'px'; r.style.background=bg;
+      r.style.borderColor=(!l[2]&&t>=12.0)?`rgba(52,211,153,${.8*seg(t,12.0,12.5)})`:'rgba(255,255,255,.09)';
+    });
+    const sk=seg(t,8.95,9.4);$('scis').style.opacity=(sk>0&&sk<1)?1:0;$('scis').style.transform=`translate(${40+sk*1250}px,${216+3*92-24}px) rotate(${Math.sin(sk*40)*18}deg)`;
+    // sticker sem duplicados
+    const sd=eob(seg(t,8.85,9.4));
+    $('stkDup').style.opacity=clamp(sd*2)*(1-seg(t,10.5,10.85));$('stkDup').style.transform=`rotate(-4deg) scale(${.4+.6*sd})`;
+    // barra de filtro + exportar
+    const fb=eob(seg(t,11.5,12.0)); $('filterBar').style.opacity=clamp(fb*2); $('filterBar').style.transform=`translateY(${(1-fb)*60}px)`;
+    const tg=eio(seg(t,12.0,12.3)); $('tglK').style.left=(4+tg*30)+'px'; $('tgl').style.background=tg>.5?'#34d399':'#4a3f6b';
+    // clique em exportar
+    const cpress=seg(t,13.25,13.5); $('csvBtn').style.transform=`scale(${1-Math.sin(cpress*Math.PI)*.1})`;
+    $('csvBtn').style.boxShadow=t>13.0?`0 0 ${40+Math.sin(t*9)*20}px rgba(232,121,249,.9)`:'';
+    // arquivo CSV voando
+    const fk=seg(t,13.4,14.5), cf=$('csvFile');
+    cf.style.opacity=fk>0?clamp(fk*6)*(1-seg(t,14.45,14.7)):0;
+    const fx=1230+eo3(fk)*420, fy=700-Math.sin(fk*Math.PI)*330-eo3(fk)*20;
+    cf.style.transform=`translate(${fx}px,${fy}px) rotate(${(1-eo3(fk))*-20+10*eo3(fk)}deg) scale(${.5+.7*eob(seg(t,13.4,13.9))})`;
+  })();
+
+  /* ===== CENA 5: biblioteca ===== */
+  (function(){
+    const op=vis($('s5'),t,14.65,18.25,.4,.3);
+    const k=eob(seg(t,14.75,15.35));
+    $('lib').style.transform=`translateY(${(1-k)*140}px) scale(${.92+.08*k})`;
+    // chips da finalidade, um a um, marcando
+    CHIPS.forEach((c,i)=>{
+      const e=$('ch'+i), a=eob(seg(t,14.95+i*.1,15.4+i*.1));
+      const active=(t>=15.2+i*.32&&t<15.2+(i+1)*.32)&&t<17.3;
+      const done=t>=15.2+i*.32;
+      e.style.opacity=clamp(a*2); e.style.transform=`translateX(${(1-a)*-120}px) scale(${active?1.04:1})`;
+      e.style.background=i===0&&t>=17.3?'rgba(139,92,246,.28)':(active?'rgba(139,92,246,.2)':'rgba(255,255,255,.05)');
+      e.style.borderColor=(i===0&&t>=17.3)||active?'#a78bfa':'rgba(255,255,255,.11)';
+      $('chk'+i).style.opacity=(active||(i===0&&t>=17.3))?1:0;
+    });
+    const mk=eob(seg(t,15.0,15.6)); $('msg').style.opacity=clamp(mk*2);$('msg').style.transform=`translateX(${(1-mk)*160}px)`;
+    const html=msgHTML(t); if($('msgBody')._h!==html){$('msgBody')._h=html;$('msgBody').innerHTML=html}
+    const f2=eo3(seg(t,15.9,16.5)), en2=t>=17.0, PH=en2?['BUSINESS NAME','CITY','NICHE','PHONE','WEBSITE','RATING']:['NOME DA EMPRESA','CIDADE','NICHO','TELEFONE','SITE','AVALIAÇÃO'];
+    const phk=PH.join('|')+(f2>.5?1:0); if($('phWrap')._k!==phk){$('phWrap')._k=phk;$('phWrap').innerHTML=PH.map(x=>f2>.5?`<span class="pill" style="font-size:22px;background:rgba(52,211,153,.16);border:2px solid var(--mint);color:#6ee7b7">✓ ${x}</span>`:`<span class="pill" style="font-size:22px;background:rgba(251,191,36,.12);border:2px dashed var(--amber);color:var(--amber)">[${x}]</span>`).join('')}
+    $('langP').textContent=t>=17.0?'🇺🇸 EN':'🇧🇷 PT';
+    $('langP').style.transform=`scale(${bump(t,17.0,.25,.4)})`;
+    // copiar
+    const cp=seg(t,17.55,17.8); $('copyBtn').style.transform=`scale(${1-Math.sin(cp*Math.PI)*.1})`;
+    $('copyBtn').textContent=t>=17.7?'✅ Copiado!':'📋 Copiar';
+    const s=eob(seg(t,16.0,16.55)); $('stkLib').style.opacity=clamp(s*2)*(1-seg(t,17.95,18.2));$('stkLib').style.transform=`rotate(-3deg) scale(${.4+.6*s})`;
+    $('nichosTag').style.opacity=seg(t,16.8,17.2);
+  })();
+
+  /* ===== CENA 6: CRM ===== */
+  (function(){
+    vis($('s6'),t,18.12,20.95,.35,.3);
+    const k=eob(seg(t,18.2,18.8)); $('crm').style.transform=`translateY(${(1-k)*140}px) scale(${.92+.08*k})`;
+    for(let i=0;i<5;i++){const a=eob(seg(t,18.3+i*.07,18.85+i*.07));$('cl'+i).style.opacity=clamp(a*2);}
+    for(let i=0;i<8;i++){const a=eob(seg(t,18.5+(i%6)*.06,19.0+(i%6)*.06));const e=$('sd'+i);e.style.opacity=clamp(a*2);e.style.transform=`scale(${.7+.3*a})`}
+    // card herói arrastado por 4 colunas
+    const hd=$('hd'), a=eob(seg(t,18.4,18.9)); hd.style.opacity=clamp(a*2);
+    const mv=eio(seg(t,18.85,20.0)); // 0..1 pelas colunas
+    const col=mv*4, cx=16+col*314, cy=146+Math.sin(mv*Math.PI)*-26;
+    const lifted=t>=18.85&&t<20.05;
+    hd.style.left=cx+'px'; hd.style.top=cy+'px';
+    hd.style.transform=`rotate(${lifted?Math.sin(mv*Math.PI)*-5:0}deg) scale(${lifted?1.07:1+Math.sin(seg(t,20.05,20.4)*Math.PI)*.08})`;
+    const won=t>=20.05;
+    hd.style.borderColor=won?'#34d399':'#e879f9';
+    $('hdv').textContent=won?'💰 R$ 2.500 · Cliente':'✓ 2 tarefas';
+    hd.style.top=(won?146+0:cy)+'px';
+    // cursor
+    const cur=$('cursor'); cur.style.opacity=seg(t,18.5,18.8)*(1-seg(t,20.5,20.8));
+    cur.style.transform=`translate(${164+cx+150}px,${100+cy+70}px) scale(${lifted?.88:1})`;
+    // stickers
+    const u=eob(seg(t,18.55,19.1)); $('stkUltra').style.opacity=clamp(u*2)*(1-seg(t,20.4,20.75));$('stkUltra').style.transform=`rotate(-3deg) scale(${.4+.6*u})`;
+    const w=eob(seg(t,20.05,20.5)); $('stkWon').style.opacity=clamp(w*2)*(1-seg(t,20.55,20.85));$('stkWon').style.transform=`rotate(4deg) scale(${.4+.6*w})`;
+  })();
+  confetti(t,20.05,1570,330,[...Array(45).keys()]);
+
+  /* ===== CENA 7: e mais ===== */
+  (function(){
+    vis($('s7'),t,20.78,24.45,.3,.3);
+    const hk=eob(seg(t,20.85,21.4)); $('maisH').style.opacity=clamp(hk*2);$('maisH').style.transform=`scale(${.7+.3*hk})`;
+    TILES.forEach((tl,i)=>{
+      const a=eob(seg(t,tl[4],tl[4]+.5)), e=$('tl'+i);
+      const dir=i%2?1:-1;
+      e.style.opacity=clamp(a*2.2);e.style.transform=`translate(${(1-a)*dir*260}px,${(1-a)*60}px) scale(${.6+.4*a}) rotate(${(1-a)*dir*8}deg)`;
+      e.style.boxShadow=`0 30px 90px rgba(0,0,0,.45),0 0 ${Math.max(0,1-seg(t,tl[4]+.3,tl[4]+.9))*70}px rgba(232,121,249,.8)`;
+    });
+  })();
+
+  /* ===== CENA 8: planos + CTA ===== */
+  (function(){
+    const planOut=1-seg(t,27.05,27.45);
+    vis($('s8'),t,24.32,27.5,.3,.4);
+    const hk=eob(seg(t,24.42,24.95)); $('planH').style.opacity=clamp(hk*2);$('planH').style.transform=`scale(${.7+.3*hk})`;
+    [['pPro',24.65],['pMax',25.15],['pUltra',25.65]].forEach(([id,st],i)=>{
+      const a=eob(seg(t,st,st+.6)), e=$(id);
+      e.style.opacity=clamp(a*2); e.style.transform=`translateY(${(1-a)*220}px) scale(${.7+.3*a}) ${id==='pMax'?`scale(${1+Math.sin(t*3)*.012})`:''}`;
+    });
+    // finale
+    const F=$('finale');
+    const fo=seg(t,27.15,27.45); F.style.opacity=fo; F.style.display=fo<=0?'none':'block';
+    const l=eob(seg(t,27.2,27.8)); $('logoF').style.transform=`scale(${l}) rotate(${(1-l)*-40}deg)`;$('logoF').style.opacity=clamp(l*3);
+    $('haloF').style.opacity=clamp(l*2);$('haloF').style.transform=`scale(${.6+.4*l})`;
+    [['ring1',0],['ring2',.45]].forEach(([id,d])=>{const r=Math.max(0,((t-27.3-d)%1.8))/1.8,e=$(id);e.style.opacity=t>27.3+d?(1-r)*.7:0;e.style.transform=`scale(${.5+r*3.2})`});
+    const c=eob(seg(t,27.45,28.05)); $('ctaH').style.opacity=clamp(c*2);$('ctaH').style.transform=`translateY(${(1-c)*70}px) scale(${.85+.15*c})`;
+    const b=eoe(seg(t,27.8,28.6)); $('ctaBtn').style.opacity=clamp(seg(t,27.8,28.1)*2);
+    const pulse=1+Math.sin(t*7)*.025*seg(t,28.6,28.9);
+    const press=seg(t,29.1,29.35);
+    $('ctaBtn').style.transform=`scale(${(.5+.5*b)*pulse*(1-Math.sin(press*Math.PI)*.07)})`;
+    $('ctaBtn').style.boxShadow=`0 0 ${70+Math.sin(t*7)*35}px rgba(232,121,249,.85),0 18px 60px rgba(168,85,247,.55),inset 0 1px 0 rgba(255,255,255,.3)`;
+    $('ctaSub').style.opacity=seg(t,28.3,28.7);
+    // cursor entra e clica
+    const cu=$('cursor2'), ck=eio(seg(t,28.6,29.15));
+    cu.style.opacity=seg(t,28.5,28.7);
+    cu.style.transform=`translate(${1500-ck*(1500-1050)}px,${1000-ck*(1000-780)}px) scale(${1-Math.sin(press*Math.PI)*.15})`;
+  })();
+  confetti(t,29.15,960,760,[...Array(90).keys()].slice(45));
+
+  /* flashes nas viradas */
+  let fl=0;[[1.5,.85]].forEach(([h,m])=>{if(t>=h)fl=Math.max(fl,(1-seg(t,h,h+.4))*m)});
+  fl=Math.max(fl,(t>=20.05?(1-seg(t,20.05,20.3))*.25:0),(t>=29.15?(1-seg(t,29.15,29.4))*.25:0));
+  $('flash').style.opacity=fl;
+  subtitle(t);
+}
+window.render=render;
+render(0);
+</script>
+</body>
+</html>
