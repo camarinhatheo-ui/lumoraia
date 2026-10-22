@@ -1,10 +1,9 @@
-"""Trilha do anúncio de 30s: música sintetizada (numpy), efeitos sincronizados e narração (Kokoro)."""
+"""Trilha do anúncio de 30s: música sintetizada (numpy) + efeitos sincronizados com a animação. Sem voz."""
 import wave, numpy as np, os
 SR = 44100
 D = 30.0
 N = int(SR * D)
 HERE = os.path.dirname(os.path.abspath(__file__))
-A = os.path.join(HERE, 'narracao')
 rng = np.random.default_rng(7)
 
 def tt(n): return np.arange(n) / SR
@@ -163,28 +162,21 @@ boom(27.2, .8); ding(27.22, 84, .15); stinger(27.2, [72, 76, 79, 84], .06)
 pop(27.45, 900, .2); pop(27.85, 700, .22)
 click(29.15, .25); pop(29.17, 500, .25); confetti_pop(29.15, .35); ding(29.2, 91, .16); ding(29.3, 96, .1); sparkle(29.3, .07)
 
-# ---------------- narração ----------------
-def load(p):
-    w = wave.open(p); sr = w.getframerate(); x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(float) / 32768
-    if w.getnchannels() > 1: x = x[::w.getnchannels()]
-    n = int(len(x) * SR / sr)
-    return np.interp(np.linspace(0, len(x) - 1, n), np.arange(len(x)), x)
-voice = np.zeros(N); mask = np.zeros(N)
-# (clipe, início da fala em s, ataque medido no arquivo)
-for name, t, onset in (('n1', .25, .05), ('n2', 3.23, .03), ('n3', 6.94, .04), ('n4', 11.14, .04),
-                       ('n5', 14.74, .04), ('n6', 18.19, .04), ('n7', 20.83, .03), ('n8', 24.39, .04)):
-    x = load(os.path.join(A, name + '.wav'))
-    x = x / (np.abs(x).max() + 1e-9) * .92
-    x = x + .3 * (x - lp(x, 1800))               # presença
-    add(voice, x, t - onset)
-    i = int((t - onset) * SR); mask[i:i + len(x)] = 1
-k = int(.12 * SR); kern = np.hanning(k * 2) / np.hanning(k * 2).sum()
-duck = 1 - .55 * np.clip(np.convolve(mask, kern, mode='same'), 0, 1)
-mix = music * duck * .72 + sfx * .85 + voice * 1.0
+
+# ---- efeitos dos textos da tela (mesmos tempos de LC em video.html: palavra j entra em a+.12+j*.09) ----
+SCENES = [(3.12, 4, [4.0, 5.05, 5.6]), (6.9, 4, [7.45, 7.7, 7.95, 8.2, 8.9]), (11.08, 3, [11.9, 13.3]),
+          (14.68, 4, [15.3, 15.6, 15.9, 16.2, 16.8]), (18.14, 4, [18.7, 19.1, 19.4]), (20.82, 4, []), (24.34, 3, [25.5, 26.0])]
+for a0, nw, chips in SCENES:
+    pop(a0 + .06, 520, .16); sparkle(a0 + .2, .04)                 # contador + ícone
+    for j in range(nw): pop(a0 + .12 + j * .09 + .04, 760 + j * 90, .13); tick(a0 + .12 + j * .09 + .02, 2300, .06)
+    for tc in chips: pop(tc + .03, 1050, .11); tick(tc, 2600, .07)
+
+# ---------------- mix (sem voz: a trilha ganha presença) ----------------
+mix = music * .95 + sfx * 1.0
 mix = np.tanh(mix * 1.1) / 1.1
-mix /= max(1e-9, np.abs(mix).max()) / .92
+mix /= max(1e-9, np.abs(mix).max()) / .78
 st = np.stack([mix, mix], 1)
 dl = int(.012 * SR); st[dl:, 1] = mix[:-dl] * .95 + st[dl:, 1] * .05     # leve abertura estéreo
 out = (np.clip(st, -1, 1) * 32767).astype(np.int16)
-w = wave.open(os.path.join(HERE, 'mix.wav'), 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(out.tobytes()); w.close()
+w = wave.open(os.path.join(HERE, 'trilha.wav'), 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(out.tobytes()); w.close()
 print('ok', len(out) / SR)
